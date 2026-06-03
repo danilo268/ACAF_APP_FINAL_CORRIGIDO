@@ -1,0 +1,26 @@
+{
+  "name": "ACAF - Centro de Performance",
+  "short_name": "ACAF",
+  "description": "App fitness para alunos e professores com treino, videos, fotos de evolucao e metas.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050713",
+  "theme_color": "#18d8e8",
+  "categories": ["fitness", "health", "sports"],
+  "icons": [
+    {
+      "src": "./assets/img/treino-profissional.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/img/ombro-profissional.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

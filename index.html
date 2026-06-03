@@ -1,0 +1,409 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#18d8e8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="ACAF" />
+  <title>ACAF - Centro de Performance</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./assets/img/ombro-profissional.png" />
+  <link rel="stylesheet" href="style.css?v=acaf-final-profissional-20260601-2" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <div>
+        <h1>ACAF</h1>
+        <p>Centro de performance</p>
+      </div>
+    </div>
+
+    <nav class="menu" aria-label="Navegação principal">
+      <button class="nav-btn active" data-section="dashboard"><span>01</span>Dashboard</button>
+      <button class="nav-btn" data-section="treinos"><span>02</span>Treinos</button>
+      <button class="nav-btn" data-section="evolucao"><span>03</span>Evolução</button>
+      <button class="nav-btn" data-section="metas"><span>04</span>Metas</button>
+      <button class="nav-btn" data-section="perfil"><span>05</span>Perfil</button>
+    </nav>
+
+    <div class="sidebar-card">
+      <span>Plano atual</span>
+      <strong id="planoSidebar">Sem ficha</strong>
+      <small id="sidebarResumo">Gere sua ficha para ativar.</small>
+    </div>
+  </aside>
+
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">ACAF profissional</span>
+          <h2 id="pageTitle">Dashboard</h2>
+      </div>
+      <div class="top-actions">
+        <button class="ghost install-action" id="btnInstall" type="button" hidden>Instalar app</button>
+        <button class="ghost" id="btnLimpar" type="button">Limpar dados</button>
+        <button class="primary" data-section="perfil" type="button">Atualizar ficha</button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="screen active-screen">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="badge">Plano inteligente de treino</span>
+          <h3>Seu painel de performance</h3>
+          <p>Monte uma ficha personalizada, acompanhe metas, registre cargas e veja vídeos reais de execução para cada exercício.</p>
+        </div>
+        <div class="hero-stats">
+          <div><strong id="heroTempo">40 min</strong><span>tempo médio</span></div>
+          <div><strong id="heroCalorias">--</strong><span>kcal alvo</span></div>
+          <div><strong id="heroNivel">iniciante</strong><span>nível</span></div>
+        </div>
+      </div>
+
+      <section class="today-panel">
+        <div class="today-main">
+          <span class="eyebrow">Treino de hoje</span>
+          <h3 id="treinoHojeTitulo">Gere sua ficha para liberar o treino recomendado.</h3>
+          <p id="treinoHojeTexto">Depois de preencher seu perfil, o ACAF monta uma semana de treino conforme objetivo, nível e frequência.</p>
+          <div class="quick-actions">
+            <button class="primary" id="btnIrTreinos" type="button">Ver treino</button>
+            <button class="ghost" id="btnDescanso" type="button">Iniciar descanso</button>
+          </div>
+        </div>
+        <div class="score-ring" aria-label="Progresso semanal">
+          <svg viewBox="0 0 120 120" role="img">
+            <circle class="track" cx="60" cy="60" r="52"></circle>
+            <circle class="progress" id="scoreCircle" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div>
+            <strong id="scorePercent">0%</strong>
+            <span>semana</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="cards">
+        <article class="metric"><span>Peso atual</span><strong id="mPeso">-- kg</strong><small id="mPesoMsg">Aguardando ficha</small></article>
+        <article class="metric"><span>IMC</span><strong id="mImc">--</strong><small id="mImcMsg">Classificação</small></article>
+        <article class="metric"><span>Água diária</span><strong id="mAgua">-- L</strong><small>Peso x 0,035 L</small></article>
+        <article class="metric"><span>Proteína</span><strong id="mProteina">-- g</strong><small>Peso x 2 g</small></article>
+        <article class="metric"><span>Manutenção</span><strong id="mCalorias">-- kcal</strong><small>Peso x 32</small></article>
+      </div>
+
+      <section class="result-card">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Resumo inteligente</span>
+            <h3 id="resultadoTitulo">Preencha os dados para gerar sua ficha.</h3>
+          </div>
+          <span class="mini-info" id="dataFicha">Dados salvos no navegador</span>
+        </div>
+        <p id="resultadoTexto">Depois de gerar, o aplicativo mostra treinos, dieta base, evolução e metas conforme seu objetivo.</p>
+        <div id="recomendacoes" class="recommendations"></div>
+      </section>
+    </section>
+
+    <section id="treinos" class="screen">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Workout library</span>
+          <h3>Biblioteca de treinos</h3>
+        </div>
+        <div class="segmented" id="filtrosTreino">
+          <button class="active" data-filter="todos" type="button">Todos</button>
+          <button data-filter="forca" type="button">Força</button>
+          <button data-filter="cardio" type="button">Cardio</button>
+          <button data-filter="core" type="button">Core</button>
+        </div>
+      </div>
+
+      <div class="category-grid">
+        <article class="category" style="--bg:url('./assets/img/forca.jpg')"><span>Força</span><strong>Progressão de cargas</strong></article>
+        <article class="category" style="--bg:url('./assets/img/cardio.jpg')"><span>Cardio</span><strong>Condicionamento</strong></article>
+        <article class="category" style="--bg:url('./assets/img/treino-profissional.png')"><span>HIIT</span><strong>Alta intensidade</strong></article>
+        <article class="category" style="--bg:url('./assets/img/ombro-profissional.png')"><span>Mobilidade</span><strong>Postura e recuperação</strong></article>
+      </div>
+
+      <div class="section-head sub-head">
+        <div>
+          <span class="eyebrow">Semana ativa</span>
+          <h3>Protocolo personalizado</h3>
+        </div>
+        <button class="ghost" id="btnSemana" type="button">Resumo da semana</button>
+      </div>
+      <div class="workout-list" id="listaTreinos"></div>
+    </section>
+
+    <section id="evolucao" class="screen">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Evolução corporal</span>
+          <h3>Controle de progresso</h3>
+        </div>
+      </div>
+
+      <div class="progress-layout">
+        <div class="chart-card">
+          <div class="section-head chart-head">
+            <div>
+              <h4>Performance da semana</h4>
+              <p>Volume estimado por treino concluído.</p>
+            </div>
+            <strong id="totalSemana">0/5</strong>
+          </div>
+          <div class="chart-bars" id="grafico"></div>
+        </div>
+        <div class="result-card compact">
+          <h4>O que melhorou</h4>
+          <ul id="melhorias">
+            <li>Gere sua ficha para receber uma análise.</li>
+          </ul>
+          <h4>O que pode melhorar</h4>
+          <ul id="pontosMelhorar">
+            <li>Complete seus dados para ativar o plano.</li>
+          </ul>
+        </div>
+      </div>
+
+      <section class="photo-evolution">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Evolução por imagem</span>
+            <h3>Comparativo trimestral</h3>
+          </div>
+          <span class="mini-info">Fotos a cada 3 meses ao longo do ano</span>
+        </div>
+
+        <div class="comparison-grid">
+          <article class="photo-slot">
+            <span>Primeiro registro</span>
+            <div id="fotoInicial" class="photo-preview empty">Sem foto</div>
+          </article>
+          <article class="photo-slot">
+            <span>Registro mais recente</span>
+            <div id="fotoAtual" class="photo-preview empty">Sem foto</div>
+          </article>
+          <article class="analysis-card">
+            <span class="eyebrow">Análise automática</span>
+            <h4 id="analiseImagemTitulo">Aguardando registros</h4>
+            <p id="analiseImagemTexto">Cadastre fotos com peso e medidas para comparar sua evolução física com mais clareza.</p>
+          </article>
+        </div>
+        <div class="evolution-chart" id="evolutionChart"></div>
+
+        <div id="linhaFotos" class="photo-timeline"></div>
+      </section>
+    </section>
+
+    <section id="metas" class="screen">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Metas</span>
+          <h3>Objetivos do plano</h3>
+        </div>
+        <button class="ghost" id="btnResetSemana" type="button">Reiniciar semana</button>
+      </div>
+
+      <div class="goal-grid" id="metasGrid"></div>
+    </section>
+
+    <section id="perfil" class="screen">
+      <section class="form-card">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Perfil do atleta</span>
+            <h3>Monte sua ficha</h3>
+          </div>
+          <span class="mini-info">Dados salvos no navegador</span>
+        </div>
+
+        <div class="people-panel">
+          <article>
+            <div class="profile-avatar" id="alunoAvatar">A</div>
+            <div>
+              <span>Aluno</span>
+              <strong id="alunoNomeResumo">Perfil do aluno</strong>
+              <small id="alunoMetaResumo">Foto, evolução e metas individuais.</small>
+            </div>
+          </article>
+          <article>
+            <div class="profile-avatar professor" id="professorAvatar">P</div>
+            <div>
+              <span>Professor</span>
+              <strong id="professorNomeResumo">Responsável técnico</strong>
+              <small>Ficha, acompanhamento e ajustes seguros.</small>
+            </div>
+          </article>
+        </div>
+
+        <div class="form-grid">
+          <label>Tipo de uso
+            <select id="tipoUsuario">
+              <option value="aluno">Aluno</option>
+              <option value="professor">Professor</option>
+              <option value="ambos">Aluno e professor</option>
+            </select>
+          </label>
+          <label>Nome
+            <input id="nome" type="text" placeholder="Ex: Alex" autocomplete="name" />
+          </label>
+          <label>Foto do aluno
+            <input id="fotoPerfil" type="file" accept="image/*" />
+          </label>
+          <label>Professor
+            <input id="professorNome" type="text" placeholder="Ex: Prof. Danilo" />
+          </label>
+          <label>Foto do professor
+            <input id="fotoProfessor" type="file" accept="image/*" />
+          </label>
+          <label>Idade
+            <input id="idade" type="number" placeholder="Ex: 21" min="10" max="90" />
+          </label>
+          <label>Peso
+            <input id="peso" type="number" placeholder="Ex: 86 kg" min="30" step="0.1" />
+          </label>
+          <label>Altura
+            <input id="altura" type="number" placeholder="Ex: 1.84 m" min="1" step="0.01" />
+          </label>
+          <label>Peso meta
+            <input id="pesoMeta" type="number" placeholder="Ex: 95 kg" min="30" step="0.1" />
+          </label>
+          <label>Objetivo
+            <select id="objetivo">
+              <option value="emagrecer">Emagrecer</option>
+              <option value="definir">Definir corpo</option>
+              <option value="ganhar">Ganhar massa</option>
+              <option value="resistencia">Resistência</option>
+            </select>
+          </label>
+          <label>Nível
+            <select id="nivel">
+              <option value="iniciante">Iniciante</option>
+              <option value="intermediario">Intermediário</option>
+              <option value="avancado">Avançado</option>
+            </select>
+          </label>
+          <label>Frequência
+            <select id="frequencia">
+              <option value="3">3x por semana</option>
+              <option value="4">4x por semana</option>
+              <option value="5">5x por semana</option>
+            </select>
+          </label>
+          <label>Condição
+            <select id="condicao">
+              <option value="sem_restricao">Sem restrição</option>
+              <option value="joelho">Cuidado com joelho</option>
+              <option value="ombro">Cuidado com ombro</option>
+              <option value="coluna">Cuidado com coluna</option>
+            </select>
+          </label>
+          <button class="primary big" id="btnGerar" type="button">Gerar ficha</button>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Ficha visual</span>
+            <h3>Registrar foto e medidas</h3>
+          </div>
+          <span class="mini-info">Ideal: repetir a cada 3 meses</span>
+        </div>
+
+        <div class="photo-form">
+          <label class="upload-box" for="fotoRegistro">
+            <input id="fotoRegistro" type="file" accept="image/*" />
+            <img id="fotoPreview" class="upload-preview" alt="Preview da foto selecionada" />
+            <span id="fotoUploadTexto">Escolher foto</span>
+            <small>Use sempre a mesma pose, luz e distância.</small>
+          </label>
+
+          <div class="form-grid compact-grid">
+            <label>Data
+              <input id="dataRegistro" type="date" />
+            </label>
+            <label>Peso no registro
+              <input id="pesoRegistro" type="number" placeholder="Ex: 86 kg" min="30" step="0.1" />
+            </label>
+            <label>Cintura
+              <input id="cinturaRegistro" type="number" placeholder="cm" min="30" step="0.1" />
+            </label>
+            <label>Peito
+              <input id="peitoRegistro" type="number" placeholder="cm" min="30" step="0.1" />
+            </label>
+            <label>Braço
+              <input id="bracoRegistro" type="number" placeholder="cm" min="15" step="0.1" />
+            </label>
+            <label>Quadril
+              <input id="quadrilRegistro" type="number" placeholder="cm" min="30" step="0.1" />
+            </label>
+            <label>Observação
+              <input id="obsRegistro" type="text" placeholder="Ex: mais definição no abdômen" />
+            </label>
+            <button class="primary big" id="btnSalvarFoto" type="button">Salvar evolução</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="mobile-nav" aria-label="Navegação mobile">
+    <button class="nav-btn active" data-section="dashboard" type="button"><span>01</span>Home</button>
+    <button class="nav-btn" data-section="treinos" type="button"><span>02</span>Treinos</button>
+    <button class="nav-btn" data-section="evolucao" type="button"><span>03</span>Status</button>
+    <button class="nav-btn" data-section="perfil" type="button"><span>05</span>Perfil</button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="rest-timer" id="restTimer" aria-live="polite">
+    <span>Descanso</span>
+    <strong id="timerValue">01:00</strong>
+    <button id="btnPararTimer" type="button">Parar</button>
+  </div>
+
+  <div class="focus-mode" id="focusMode" aria-hidden="true">
+    <div class="focus-shell">
+      <button class="focus-close" id="focusClose" type="button">Fechar</button>
+      <div class="focus-video">
+        <video id="focusVideo" muted loop controls playsinline></video>
+      </div>
+      <div class="focus-info">
+        <span class="eyebrow" id="focusCounter">Exercício 1 de 1</span>
+        <h3 id="focusTitle">Treino ativo</h3>
+        <strong id="focusSeries">--</strong>
+        <p id="focusDesc">Siga o exercício com controle.</p>
+        <div class="focus-timer">
+          <span>Descanso</span>
+          <strong id="focusTimerValue">01:00</strong>
+        </div>
+        <div class="focus-actions">
+          <button class="ghost" id="focusPrev" type="button">Anterior</button>
+          <button class="primary" id="focusDone" type="button">Concluir</button>
+          <button class="ghost" id="focusRest" type="button">Descanso</button>
+          <button class="ghost" id="focusNext" type="button">Próximo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalVideo">
+    <div class="modal-box">
+      <button class="close" id="fecharModal" type="button" aria-label="Fechar vídeo">x</button>
+      <h3 id="modalTitulo">Treino</h3>
+      <div class="modal-tags" id="modalTags"></div>
+      <video id="videoPlayer" controls playsinline></video>
+      <p id="modalDescricao"></p>
+      <button class="modal-primary" type="button" id="modalPersonalizar">Personalizar exercício</button>
+      <button class="modal-secondary" type="button" id="modalFecharBaixo">Fechar</button>
+    </div>
+  </div>
+
+  <script src="script.js?v=acaf-final-profissional-20260601-2"></script>
+</body>
+</html>
+
