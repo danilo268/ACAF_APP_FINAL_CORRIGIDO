@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#18d8e8" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="ACAF" />
   <title>ACAF - Centro de Performance</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./assets/img/ombro-profissional.png" />
-  <link rel="stylesheet" href="style.css?v=acaf-final-profissional-20260601-2" />
+  <link rel="stylesheet" href="style.css?v=acaf-premium-20260609-9" />
 </head>
 <body>
   <aside class="sidebar">
@@ -22,11 +21,11 @@
     </div>
 
     <nav class="menu" aria-label="Navegação principal">
-      <button class="nav-btn active" data-section="dashboard"><span>01</span>Dashboard</button>
-      <button class="nav-btn" data-section="treinos"><span>02</span>Treinos</button>
-      <button class="nav-btn" data-section="evolucao"><span>03</span>Evolução</button>
-      <button class="nav-btn" data-section="metas"><span>04</span>Metas</button>
-      <button class="nav-btn" data-section="perfil"><span>05</span>Perfil</button>
+      <button class="nav-btn active" data-section="dashboard"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v4H4zM14 15h6v4h-6z"></path></svg></span>Dashboard</button>
+      <button class="nav-btn" data-section="treinos"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4M7 8v8M17 8v8M20 10v4M7 12h10"></path></svg></span>Treinos</button>
+      <button class="nav-btn" data-section="evolucao"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V5M5 19h15M9 16v-5M13 16V8M17 16v-9"></path></svg></span>Evolução</button>
+      <button class="nav-btn" data-section="metas"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20a8 8 0 1 0-8-8 8 8 0 0 0 8 8zM12 16a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM12 12h.01"></path></svg></span>Metas</button>
+      <button class="nav-btn" data-section="perfil"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM4 20a8 8 0 0 1 16 0"></path></svg></span>Perfil</button>
     </nav>
 
     <div class="sidebar-card">
@@ -44,7 +43,7 @@
       </div>
       <div class="top-actions">
         <button class="ghost install-action" id="btnInstall" type="button" hidden>Instalar app</button>
-        <button class="ghost" id="btnLimpar" type="button">Limpar dados</button>
+        <button class="ghost danger-ghost" id="btnLimpar" type="button">Limpar dados</button>
         <button class="primary" data-section="perfil" type="button">Atualizar ficha</button>
       </div>
     </header>
@@ -57,9 +56,9 @@
           <p>Monte uma ficha personalizada, acompanhe metas, registre cargas e veja vídeos reais de execução para cada exercício.</p>
         </div>
         <div class="hero-stats">
-          <div><strong id="heroTempo">40 min</strong><span>tempo médio</span></div>
-          <div><strong id="heroCalorias">--</strong><span>kcal alvo</span></div>
-          <div><strong id="heroNivel">iniciante</strong><span>nível</span></div>
+          <div><strong id="heroTempo">Aguardando</strong><span>tempo médio</span></div>
+          <div><strong id="heroCalorias">Aguardando</strong><span>kcal alvo</span></div>
+          <div><strong id="heroNivel">Aguardando</strong><span>nível</span></div>
         </div>
       </div>
 
@@ -69,7 +68,7 @@
           <h3 id="treinoHojeTitulo">Gere sua ficha para liberar o treino recomendado.</h3>
           <p id="treinoHojeTexto">Depois de preencher seu perfil, o ACAF monta uma semana de treino conforme objetivo, nível e frequência.</p>
           <div class="quick-actions">
-            <button class="primary" id="btnIrTreinos" type="button">Ver treino</button>
+            <button class="primary" id="btnIrTreinos" type="button">Iniciar treino</button>
             <button class="ghost" id="btnDescanso" type="button">Iniciar descanso</button>
           </div>
         </div>
@@ -85,12 +84,23 @@
         </div>
       </section>
 
+      <section class="achievement-strip" aria-label="Consistência e conquistas">
+        <article>
+          <span class="achievement-icon" id="streakIcon">○</span>
+          <div><strong id="streakValue">0 dias</strong><small>sequência de treinos</small></div>
+        </article>
+        <article class="achievement-wide">
+          <span class="eyebrow">Conquistas</span>
+          <div class="badge-list" id="badgeList"><span class="locked-badge">Comece um treino para desbloquear</span></div>
+        </article>
+      </section>
+
       <div class="cards">
-        <article class="metric"><span>Peso atual</span><strong id="mPeso">-- kg</strong><small id="mPesoMsg">Aguardando ficha</small></article>
-        <article class="metric"><span>IMC</span><strong id="mImc">--</strong><small id="mImcMsg">Classificação</small></article>
-        <article class="metric"><span>Água diária</span><strong id="mAgua">-- L</strong><small>Peso x 0,035 L</small></article>
-        <article class="metric"><span>Proteína</span><strong id="mProteina">-- g</strong><small>Peso x 2 g</small></article>
-        <article class="metric"><span>Manutenção</span><strong id="mCalorias">-- kcal</strong><small>Peso x 32</small></article>
+        <article class="metric"><span>Peso atual</span><strong id="mPeso">Aguardando</strong><small id="mPesoMsg">Preencha o perfil</small></article>
+        <article class="metric"><span>IMC</span><strong id="mImc">Aguardando</strong><small id="mImcMsg">Preencha peso e altura</small></article>
+        <article class="metric"><span>Água diária</span><strong id="mAgua">Aguardando</strong><small>Peso x 0,035 L</small></article>
+        <article class="metric"><span>Proteína</span><strong id="mProteina">Aguardando</strong><small>Peso x 2 g <button class="info-tip" type="button" title="Estimativa base: 2 gramas de proteína por kg de peso corporal.">i</button></small></article>
+        <article class="metric"><span>Manutenção</span><strong id="mCalorias">Aguardando</strong><small>Metabolismo + atividade <button class="info-tip" type="button" title="Estimativa de manutenção baseada em idade, peso, altura, sexo informado e frequência semanal.">i</button></small></article>
       </div>
 
       <section class="result-card">
@@ -103,6 +113,20 @@
         </div>
         <p id="resultadoTexto">Depois de gerar, o aplicativo mostra treinos, dieta base, evolução e metas conforme seu objetivo.</p>
         <div id="recomendacoes" class="recommendations"></div>
+      </section>
+
+      <section class="mobile-proof">
+        <div>
+          <span class="eyebrow">Ficha no celular</span>
+          <h3>Troque o papel por treino guiado</h3>
+          <p>O aluno abre a ficha, vê o treino do dia, assiste o vídeo, registra carga e acompanha evolução sem depender de folha impressa.</p>
+        </div>
+        <div class="phone-preview" aria-hidden="true">
+          <span>Hoje</span>
+          <strong>Treino de Segunda-feira</strong>
+          <small>6 exercícios + esteira 20 min</small>
+        </div>
+        <button class="primary install-action" id="btnInstallInline" type="button">Instalar no celular</button>
       </section>
     </section>
 
@@ -121,10 +145,10 @@
       </div>
 
       <div class="category-grid">
-        <article class="category" style="--bg:url('./assets/img/forca.jpg')"><span>Força</span><strong>Progressão de cargas</strong></article>
-        <article class="category" style="--bg:url('./assets/img/cardio.jpg')"><span>Cardio</span><strong>Condicionamento</strong></article>
-        <article class="category" style="--bg:url('./assets/img/treino-profissional.png')"><span>HIIT</span><strong>Alta intensidade</strong></article>
-        <article class="category" style="--bg:url('./assets/img/ombro-profissional.png')"><span>Mobilidade</span><strong>Postura e recuperação</strong></article>
+        <article class="category category-forca"><span>Força</span><strong>Progressão de cargas</strong></article>
+        <article class="category category-cardio"><span>Cardio</span><strong>Condicionamento</strong></article>
+        <article class="category category-hiit"><span>HIIT</span><strong>Alta intensidade</strong></article>
+        <article class="category category-mobilidade"><span>Mobilidade</span><strong>Postura e recuperação</strong></article>
       </div>
 
       <div class="section-head sub-head">
@@ -143,6 +167,7 @@
           <span class="eyebrow">Evolução corporal</span>
           <h3>Controle de progresso</h3>
         </div>
+        <button class="ghost" id="btnExportarRelatorio" type="button">Exportar relatório PDF</button>
       </div>
 
       <div class="progress-layout">
@@ -167,6 +192,42 @@
           </ul>
         </div>
       </div>
+
+      <section class="performance-intelligence">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Inteligência de treino</span>
+            <h3>Força e volume real</h3>
+          </div>
+          <span class="mini-info">Calculado com cargas e repetições registradas</span>
+        </div>
+        <div class="strength-metrics">
+          <article><span>Melhor 1RM estimado</span><strong id="bestOneRm">Aguardando carga</strong><small>Fórmula de Epley</small></article>
+          <article><span>Volume total</span><strong id="totalVolume">0 kg</strong><small>Séries x repetições x carga</small></article>
+          <article><span>Séries registradas</span><strong id="totalSets">0</strong><small>Toques concluídos</small></article>
+        </div>
+        <div class="training-analytics-grid">
+          <article class="analytics-card">
+            <div class="chart-title"><strong>Evolução de força</strong><span>1RM por registro</span></div>
+            <div id="strengthChart" class="mini-line-chart"></div>
+          </article>
+          <article class="analytics-card">
+            <div class="chart-title"><strong>Volume de treino</strong><span>Últimas sessões</span></div>
+            <div id="volumeChart" class="mini-line-chart"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="training-calendar-card">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Cronograma</span>
+            <h3>Calendário de consistência</h3>
+          </div>
+          <span class="mini-info" id="calendarMonth">Mês atual</span>
+        </div>
+        <div class="training-calendar" id="trainingCalendar"></div>
+      </section>
 
       <section class="photo-evolution">
         <div class="section-head">
@@ -250,26 +311,39 @@
           <label>Nome
             <input id="nome" type="text" placeholder="Ex: Alex" autocomplete="name" />
           </label>
-          <label>Foto do aluno
+          <label class="file-field" for="fotoPerfil">
+            <span>Foto do aluno</span>
             <input id="fotoPerfil" type="file" accept="image/*" />
+            <strong id="fotoPerfilTexto">Escolher foto</strong>
+            <small>PNG ou JPG para o perfil.</small>
           </label>
           <label>Professor
             <input id="professorNome" type="text" placeholder="Ex: Prof. Danilo" />
           </label>
-          <label>Foto do professor
+          <label class="file-field" for="fotoProfessor">
+            <span>Foto do professor</span>
             <input id="fotoProfessor" type="file" accept="image/*" />
+            <strong id="fotoProfessorTexto">Escolher foto</strong>
+            <small>Imagem do responsável técnico.</small>
           </label>
           <label>Idade
             <input id="idade" type="number" placeholder="Ex: 21" min="10" max="90" />
           </label>
+          <label>Sexo para cálculo
+            <select id="sexo">
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+              <option value="neutro">Prefiro não informar</option>
+            </select>
+          </label>
           <label>Peso
-            <input id="peso" type="number" placeholder="Ex: 86 kg" min="30" step="0.1" />
+            <span class="unit-input"><input id="peso" type="number" placeholder="Ex: 86" min="30" step="0.1" aria-label="Peso" /><em>kg</em></span>
           </label>
           <label>Altura
-            <input id="altura" type="number" placeholder="Ex: 1.84 m" min="1" step="0.01" />
+            <span class="unit-input"><input id="altura" type="number" placeholder="Ex: 1.84" min="1" step="0.01" aria-label="Altura" /><em>m</em></span>
           </label>
           <label>Peso meta
-            <input id="pesoMeta" type="number" placeholder="Ex: 95 kg" min="30" step="0.1" />
+            <span class="unit-input"><input id="pesoMeta" type="number" placeholder="Ex: 95" min="30" step="0.1" aria-label="Peso meta" /><em>kg</em></span>
           </label>
           <label>Objetivo
             <select id="objetivo">
@@ -281,9 +355,26 @@
           </label>
           <label>Nível
             <select id="nivel">
+              <option value="">Selecione o nível</option>
               <option value="iniciante">Iniciante</option>
               <option value="intermediario">Intermediário</option>
               <option value="avancado">Avançado</option>
+            </select>
+          </label>
+          <label>Tempo treinando agora
+            <select id="experiencia">
+              <option value="0">Até 6 meses</option>
+              <option value="6">6 a 18 meses</option>
+              <option value="18">Mais de 18 meses</option>
+            </select>
+          </label>
+          <label>Histórico antes de parar
+            <select id="historicoTreino">
+              <option value="0">Sem histórico</option>
+              <option value="6">Já treinei 6+ meses</option>
+              <option value="12">Já treinei 1+ ano</option>
+              <option value="24">Já treinei 2+ anos</option>
+              <option value="36">Já treinei 3+ anos</option>
             </select>
           </label>
           <label>Frequência
@@ -327,19 +418,19 @@
               <input id="dataRegistro" type="date" />
             </label>
             <label>Peso no registro
-              <input id="pesoRegistro" type="number" placeholder="Ex: 86 kg" min="30" step="0.1" />
+              <span class="unit-input"><input id="pesoRegistro" type="number" placeholder="Ex: 86" min="30" step="0.1" aria-label="Peso no registro" /><em>kg</em></span>
             </label>
             <label>Cintura
-              <input id="cinturaRegistro" type="number" placeholder="cm" min="30" step="0.1" />
+              <span class="unit-input"><input id="cinturaRegistro" type="number" placeholder="Ex: 85" min="30" step="0.1" aria-label="Cintura" /><em>cm</em></span>
             </label>
             <label>Peito
-              <input id="peitoRegistro" type="number" placeholder="cm" min="30" step="0.1" />
+              <span class="unit-input"><input id="peitoRegistro" type="number" placeholder="Ex: 98" min="30" step="0.1" aria-label="Peito" /><em>cm</em></span>
             </label>
             <label>Braço
-              <input id="bracoRegistro" type="number" placeholder="cm" min="15" step="0.1" />
+              <span class="unit-input"><input id="bracoRegistro" type="number" placeholder="Ex: 36" min="15" step="0.1" aria-label="Braço" /><em>cm</em></span>
             </label>
             <label>Quadril
-              <input id="quadrilRegistro" type="number" placeholder="cm" min="30" step="0.1" />
+              <span class="unit-input"><input id="quadrilRegistro" type="number" placeholder="Ex: 102" min="30" step="0.1" aria-label="Quadril" /><em>cm</em></span>
             </label>
             <label>Observação
               <input id="obsRegistro" type="text" placeholder="Ex: mais definição no abdômen" />
@@ -352,13 +443,25 @@
   </main>
 
   <div class="mobile-nav" aria-label="Navegação mobile">
-    <button class="nav-btn active" data-section="dashboard" type="button"><span>01</span>Home</button>
-    <button class="nav-btn" data-section="treinos" type="button"><span>02</span>Treinos</button>
-    <button class="nav-btn" data-section="evolucao" type="button"><span>03</span>Status</button>
-    <button class="nav-btn" data-section="perfil" type="button"><span>05</span>Perfil</button>
+    <button class="nav-btn active" data-section="dashboard" type="button"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v4H4zM14 15h6v4h-6z"></path></svg></span>Home</button>
+    <button class="nav-btn" data-section="treinos" type="button"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4M7 8v8M17 8v8M20 10v4M7 12h10"></path></svg></span>Treinos</button>
+    <button class="nav-btn" data-section="evolucao" type="button"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V5M5 19h15M9 16v-5M13 16V8M17 16v-9"></path></svg></span>Status</button>
+    <button class="nav-btn" data-section="perfil" type="button"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM4 20a8 8 0 0 1 16 0"></path></svg></span>Perfil</button>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="confirm-modal" id="confirmClear" aria-hidden="true">
+    <div class="confirm-box" role="dialog" aria-modal="true" aria-labelledby="confirmClearTitle">
+      <span class="eyebrow">Ação permanente</span>
+      <h3 id="confirmClearTitle">Apagar todos os dados?</h3>
+      <p>Essa ação remove ficha, treinos concluídos e registros visuais salvos neste navegador.</p>
+      <div class="confirm-actions">
+        <button class="ghost" id="btnCancelarLimpeza" type="button">Cancelar</button>
+        <button class="primary danger-primary" id="btnConfirmarLimpeza" type="button">Apagar dados</button>
+      </div>
+    </div>
+  </div>
 
   <div class="rest-timer" id="restTimer" aria-live="polite">
     <span>Descanso</span>
@@ -370,7 +473,7 @@
     <div class="focus-shell">
       <button class="focus-close" id="focusClose" type="button">Fechar</button>
       <div class="focus-video">
-        <video id="focusVideo" muted loop controls playsinline></video>
+        <video id="focusVideo" muted loop controls></video>
       </div>
       <div class="focus-info">
         <span class="eyebrow" id="focusCounter">Exercício 1 de 1</span>
@@ -396,14 +499,15 @@
       <button class="close" id="fecharModal" type="button" aria-label="Fechar vídeo">x</button>
       <h3 id="modalTitulo">Treino</h3>
       <div class="modal-tags" id="modalTags"></div>
-      <video id="videoPlayer" controls playsinline></video>
+      <video id="videoPlayer" controls></video>
       <p id="modalDescricao"></p>
+      <button class="modal-secondary" type="button" id="modalPip">Abrir janela flutuante</button>
       <button class="modal-primary" type="button" id="modalPersonalizar">Personalizar exercício</button>
       <button class="modal-secondary" type="button" id="modalFecharBaixo">Fechar</button>
     </div>
   </div>
 
-  <script src="script.js?v=acaf-final-profissional-20260601-2"></script>
+  <script src="script.js?v=acaf-premium-20260609-9"></script>
 </body>
 </html>
 

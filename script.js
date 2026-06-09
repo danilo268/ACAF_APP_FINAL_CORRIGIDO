@@ -1,68 +1,68 @@
 ﻿const treinosBase = [
   {
     dia: "Segunda",
-    titulo: "Peito e tríceps",
-    grupo: "forca",
-    img: "./assets/img/peito.jpg",
-    video: "./assets/videos/peito.mp4",
-    tempo: 55,
-    kcal: 420,
-    nivel: "Intermediário",
-    desc: "Supino reto, crossover no cabo, flexão e tríceps na polia. Foco em peito, braços e força.",
-    series: "4 séries x 8 a 12 repetições",
-    cuidado: "Mantenha escapulas firmes e cotovelos controlados."
-  },
-  {
-    dia: "Terça",
-    titulo: "Costas e bíceps",
-    grupo: "forca",
-    img: "./assets/img/costas.jpg",
-    video: "./assets/videos/costas.mp4",
-    tempo: 50,
-    kcal: 390,
-    nivel: "Intermediário",
-    desc: "Puxada frontal, remada curvada, serrote e rosca direta. Foco em costas e bíceps.",
-    series: "4 séries x 10 repetições",
-    cuidado: "Evite puxar com o pescoço e controle a volta do movimento."
-  },
-  {
-    dia: "Quarta",
     titulo: "Pernas e glúteos",
     grupo: "forca",
     img: "./assets/img/pernas.jpg",
     video: "./assets/videos/pernas.mp4",
+    tempo: 75,
+    kcal: 520,
+    nivel: "Intermediário",
+    desc: "Leg press, extensora, posterior, glúteos, panturrilha e cardio final.",
+    series: "6 a 8 exercícios + cardio 20 a 30 min",
+    cuidado: "Joelhos alinhados aos pés e cardio final na esteira ou bicicleta."
+  },
+  {
+    dia: "Terça",
+    titulo: "Peito",
+    grupo: "forca",
+    img: "./assets/img/peito.jpg",
+    video: "./assets/videos/peito.mp4",
+    tempo: 65,
+    kcal: 440,
+    nivel: "Intermediário",
+    desc: "Supinos, crossover, crucifixo, flexão técnica e cardio final.",
+    series: "5 a 7 exercícios + cardio 20 a 30 min",
+    cuidado: "Escápulas firmes, ombros baixos e execução controlada."
+  },
+  {
+    dia: "Quarta",
+    titulo: "Tríceps",
+    grupo: "forca",
+    img: "./assets/img/peito.jpg",
+    video: "./assets/videos/peito.mp4",
     tempo: 60,
-    kcal: 480,
-    nivel: "Avançado",
-    desc: "Agachamento, leg press, avanço e mesa flexora. Treino completo para pernas e glúteos.",
-    series: "5 séries x 8 a 12 repetições",
-    cuidado: "Joelhos alinhados aos pés e amplitude sem dor."
+    kcal: 380,
+    nivel: "Intermediário",
+    desc: "Polia, corda, francês, coice, máquina e cardio leve.",
+    series: "5 a 7 exercícios + cardio 20 min",
+    cuidado: "Cotovelos estáveis e sem desconforto no ombro."
   },
   {
     dia: "Quinta",
-    titulo: "Cardio HIIT",
-    grupo: "cardio",
-    img: "./assets/img/cardio.jpg",
-    video: "./assets/videos/cardio.mp4",
-    tempo: 30,
-    kcal: 360,
-    nivel: "Todos",
-    desc: "Corrida intervalada, bike, polichinelo e burpee. Excelente para queima calórica.",
-    series: "10 tiros x 40 segundos",
-    cuidado: "Aquecimento obrigatorio e pausa quando a tecnica cair."
+    titulo: "Costas",
+    grupo: "forca",
+    img: "./assets/img/costas.jpg",
+    video: "./assets/videos/costas.mp4",
+    tempo: 70,
+    kcal: 460,
+    nivel: "Intermediário",
+    desc: "Puxadas, remadas, pulldown, estabilidade escapular e cardio final.",
+    series: "5 a 7 exercícios + cardio 20 a 30 min",
+    cuidado: "Evite puxar com o pescoço e controle a volta do movimento."
   },
   {
     dia: "Sexta",
-    titulo: "Ombros e core",
-    grupo: "core",
-    img: "./assets/img/ombro-profissional.png",
-    video: "./assets/videos/ombro.mp4",
-    tempo: 45,
-    kcal: 310,
+    titulo: "Bíceps",
+    grupo: "forca",
+    img: "./assets/img/costas.jpg",
+    video: "./assets/videos/costas.mp4",
+    tempo: 60,
+    kcal: 360,
     nivel: "Intermediário",
-    desc: "Desenvolvimento, face pull, prancha e abdominal infra para postura e estabilidade.",
-    series: "3 séries x 12 repetições",
-    cuidado: "Não force a lombar durante exercícios de core."
+    desc: "Roscas direta, alternada, Scott, martelo, cabo, concentrada e cardio final.",
+    series: "5 a 8 exercícios + cardio 20 min",
+    cuidado: "Cotovelos fixos, punhos firmes e sem balançar o tronco."
   }
 ];
 
@@ -77,6 +77,8 @@ let deferredInstallPrompt = null;
 let focusIndex = 0;
 let focusTimerInterval = null;
 let focusTimerSeconds = 60;
+let videoPreviewObserver = null;
+let timerAudioContext = null;
 
 const midiasOriginais = treinosBase.reduce((mapa, treino) => {
   mapa[treino.dia] = {
@@ -119,6 +121,113 @@ const gruposExercicios = [
         grupo: "Tríceps",
         series: "3 séries x 12 a 15 repetições | descanso 60s",
         desc: "Cotovelos fixos ao lado do corpo, empurre a barra para baixo e controle a volta sem balançar o tronco."
+      },
+      {
+        id: "crucifixo-maquina",
+        titulo: "Crucifixo na máquina",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Peito",
+        series: "3 séries x 12 repetições | descanso 60s",
+        desc: "Feche os braços sem bater as placas, peito alto e volta controlada para alongar sem dor."
+      },
+      {
+        id: "supino-maquina",
+        titulo: "Supino máquina",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Peito",
+        series: "3 séries x 10 a 12 repetições | descanso 75s",
+        desc: "Opção estável para trabalhar peito com segurança, mantendo costas apoiadas e controle na volta."
+      },
+      {
+        id: "flexao-controlada",
+        titulo: "Flexão controlada",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Peito",
+        series: "3 séries x máximo técnico | descanso 60s",
+        desc: "Desça com controle, mantenha corpo alinhado e pare antes de perder a postura."
+      },
+      {
+        id: "crucifixo-inclinado",
+        titulo: "Crucifixo inclinado",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Peito",
+        nivelMin: "intermediario",
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Variação para parte superior do peito, abrindo os braços com cotovelos semiflexionados."
+      },
+      {
+        id: "triceps-corda",
+        titulo: "Tríceps na corda",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Tríceps",
+        series: "3 séries x 12 a 15 repetições | descanso 60s",
+        desc: "Abra a corda no final do movimento e mantenha os cotovelos próximos ao corpo."
+      },
+      {
+        id: "triceps-frances-corda",
+        titulo: "Tríceps francês na corda",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Tríceps",
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Cotovelos apontados para frente, estenda os braços acima da cabeça e controle a descida."
+      },
+      {
+        id: "triceps-coice",
+        titulo: "Tríceps coice",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Tríceps",
+        series: "3 séries x 12 por braço | descanso 45s",
+        desc: "Tronco levemente inclinado, cotovelo fixo e extensão completa sem balançar o braço."
+      },
+      {
+        id: "triceps-maquina",
+        titulo: "Tríceps máquina",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Tríceps",
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Use o apoio da máquina para isolar o tríceps e controlar a fase negativa."
+      },
+      {
+        id: "mergulho-banco",
+        titulo: "Mergulho no banco",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Tríceps",
+        nivelMin: "intermediario",
+        evitar: ["ombro"],
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Desça pouco, cotovelos para trás e pare se sentir desconforto no ombro."
+      },
+      {
+        id: "supino-inclinado-halteres",
+        titulo: "Supino inclinado com halteres",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Peito",
+        nivelMin: "intermediario",
+        experienciaMin: 6,
+        series: "3 séries x 8 a 10 repetições | descanso 75s",
+        desc: "Variação para parte superior do peito, com halteres descendo alinhados e sem abrir demais os cotovelos."
+      },
+      {
+        id: "triceps-testa-controlado",
+        titulo: "Tríceps testa controlado",
+        video: "./assets/videos/peito.mp4",
+        inicio: 0,
+        grupo: "Tríceps",
+        nivelMin: "avancado",
+        experienciaMin: 18,
+        evitar: ["ombro"],
+        series: "4 séries x 8 a 10 repetições | descanso 75s",
+        desc: "Exercício avançado para tríceps, priorizando cotovelos estáveis e carga sem desconforto no ombro."
       }
     ]
   },
@@ -154,6 +263,102 @@ const gruposExercicios = [
         grupo: "Bíceps",
         series: "3 séries x 10 a 12 repetições | descanso 60s",
         desc: "Suba sem balançar o corpo e desça lentamente para manter tensão."
+      },
+      {
+        id: "pulldown-corda",
+        titulo: "Pulldown na corda",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Costas",
+        series: "3 séries x 12 repetições | descanso 60s",
+        desc: "Braços quase estendidos, puxe a corda para baixo sentindo as dorsais sem jogar o tronco."
+      },
+      {
+        id: "remada-maquina-neutra",
+        titulo: "Remada máquina pegada neutra",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Costas",
+        series: "3 séries x 10 a 12 repetições | descanso 75s",
+        desc: "Apoie o peito, puxe com cotovelos e segure um segundo na contração."
+      },
+      {
+        id: "rosca-alternada",
+        titulo: "Rosca alternada",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Bíceps",
+        series: "3 séries x 10 por braço | descanso 60s",
+        desc: "Alterne os braços mantendo cotovelos fixos e punho firme durante toda a subida."
+      },
+      {
+        id: "rosca-scott-maquina",
+        titulo: "Rosca Scott na máquina",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Bíceps",
+        nivelMin: "intermediario",
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Apoie bem o braço no banco e controle a descida para não perder tensão."
+      },
+      {
+        id: "rosca-cabo",
+        titulo: "Rosca no cabo",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Bíceps",
+        series: "3 séries x 12 repetições | descanso 60s",
+        desc: "Use tensão constante no cabo, cotovelos fixos e subida controlada."
+      },
+      {
+        id: "rosca-concentrada",
+        titulo: "Rosca concentrada",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Bíceps",
+        series: "3 séries x 10 por braço | descanso 45s",
+        desc: "Apoie o braço, suba sem pressa e controle bem a descida para isolar o bíceps."
+      },
+      {
+        id: "rosca-inclinada",
+        titulo: "Rosca inclinada",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Bíceps",
+        nivelMin: "intermediario",
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Banco inclinado, braços para baixo e alongamento controlado sem forçar o ombro."
+      },
+      {
+        id: "rosca-inversa",
+        titulo: "Rosca inversa",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Bíceps",
+        series: "3 séries x 12 repetições | descanso 60s",
+        desc: "Pegada pronada para antebraço e braquial, punhos firmes e movimento limpo."
+      },
+      {
+        id: "remada-unilateral",
+        titulo: "Remada unilateral",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Costas",
+        nivelMin: "intermediario",
+        experienciaMin: 6,
+        series: "3 séries x 10 a 12 por lado | descanso 60s",
+        desc: "Trabalhe um lado de cada vez, mantendo tronco firme e cotovelo puxando para trás."
+      },
+      {
+        id: "rosca-martelo",
+        titulo: "Rosca martelo",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Bíceps",
+        nivelMin: "avancado",
+        experienciaMin: 18,
+        series: "4 séries x 10 repetições | descanso 60s",
+        desc: "Variação para bíceps e braquial, com punhos neutros e subida sem impulsionar o tronco."
       }
     ]
   },
@@ -198,6 +403,58 @@ const gruposExercicios = [
         grupo: "Pernas",
         series: "4 séries x 12 a 15 repetições | descanso 45s",
         desc: "Use amplitude completa, suba na ponta dos pés e desça até alongar sem perder controle."
+      },
+      {
+        id: "agachamento-guiado",
+        titulo: "Agachamento guiado",
+        video: "./assets/videos/pernas.mp4",
+        inicio: 0,
+        grupo: "Pernas",
+        nivelMin: "intermediario",
+        series: "3 séries x 8 a 10 repetições | descanso 90s",
+        desc: "Use o aparelho para manter trajetória estável, pés firmes e joelhos alinhados."
+      },
+      {
+        id: "cadeira-abdutora",
+        titulo: "Cadeira abdutora",
+        video: "./assets/videos/pernas.mp4",
+        inicio: 0,
+        grupo: "Pernas",
+        series: "3 séries x 12 a 15 repetições | descanso 45s",
+        desc: "Abra as pernas com controle, segure no final e volte sem deixar a carga despencar."
+      },
+      {
+        id: "gluteo-maquina",
+        titulo: "Glúteo na máquina",
+        video: "./assets/videos/pernas.mp4",
+        inicio: 0,
+        grupo: "Pernas",
+        nivelMin: "intermediario",
+        series: "3 séries x 10 a 12 por perna | descanso 60s",
+        desc: "Empurre com o calcanhar e mantenha quadril encaixado para concentrar no glúteo."
+      },
+      {
+        id: "cadeira-flexora",
+        titulo: "Cadeira flexora",
+        video: "./assets/videos/pernas.mp4",
+        inicio: 0,
+        grupo: "Pernas",
+        nivelMin: "intermediario",
+        experienciaMin: 6,
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Fortalece posterior de coxa com joelho apoiado e movimento controlado, boa opção quando precisa poupar impacto."
+      },
+      {
+        id: "agachamento-bulgaro",
+        titulo: "Agachamento búlgaro",
+        video: "./assets/videos/pernas.mp4",
+        inicio: 0,
+        grupo: "Pernas",
+        nivelMin: "avancado",
+        experienciaMin: 18,
+        evitar: ["joelho"],
+        series: "4 séries x 8 a 10 por perna | descanso 90s",
+        desc: "Variação unilateral avançada para força e estabilidade. Evite se houver dor ou lesão ativa no joelho."
       }
     ]
   },
@@ -224,6 +481,64 @@ const gruposExercicios = [
         grupo: "Core",
         series: "3 séries x 30 a 45 segundos | descanso 45s",
         desc: "Contraia abdômen e glúteos, mantenha o corpo em linha reta e respire com controle."
+      },
+      {
+        id: "bike-intervalada",
+        titulo: "Bike intervalada",
+        video: "./assets/videos/cardio.mp4",
+        inicio: 0,
+        grupo: "Cardio",
+        nivelMin: "intermediario",
+        experienciaMin: 6,
+        series: "8 tiros x 30 segundos forte | descanso 60s",
+        desc: "Opção de cardio com baixo impacto, especialmente útil para quem precisa poupar joelho."
+      },
+      {
+        id: "esteira-inclinada",
+        titulo: "Esteira inclinada",
+        video: "./assets/videos/cardio.mp4",
+        inicio: 0,
+        grupo: "Cardio",
+        series: "20 minutos | ritmo moderado",
+        desc: "Caminhada firme com leve inclinação, mantendo respiração controlada e sem impacto excessivo."
+      },
+      {
+        id: "bike-moderada",
+        titulo: "Bike moderada",
+        video: "./assets/videos/cardio.mp4",
+        inicio: 0,
+        grupo: "Cardio",
+        series: "20 minutos | zona confortável",
+        desc: "Alternativa para quem quer melhorar fôlego poupando joelho e lombar."
+      },
+      {
+        id: "escada-controlada",
+        titulo: "Escada controlada",
+        video: "./assets/videos/cardio.mp4",
+        inicio: 0,
+        grupo: "Cardio",
+        nivelMin: "intermediario",
+        evitar: ["joelho"],
+        series: "10 a 15 minutos | cadência constante",
+        desc: "Use passadas curtas, postura alta e pare se o joelho incomodar."
+      },
+      {
+        id: "mobilidade-quadril",
+        titulo: "Mobilidade de quadril",
+        video: "./assets/videos/cardio.mp4",
+        inicio: 0,
+        grupo: "Core",
+        series: "2 blocos x 40 segundos por lado",
+        desc: "Prepare quadril e tornozelos para melhorar amplitude nos treinos de pernas."
+      },
+      {
+        id: "alongamento-pos-treino",
+        titulo: "Alongamento pós-treino",
+        video: "./assets/videos/cardio.mp4",
+        inicio: 0,
+        grupo: "Core",
+        series: "6 minutos | respiração lenta",
+        desc: "Finalize soltando cadeia posterior, peitoral e costas para melhorar recuperação."
       }
     ]
   },
@@ -259,27 +574,139 @@ const gruposExercicios = [
         grupo: "Ombros",
         series: "3 séries x 12 a 15 repetições | descanso 60s",
         desc: "Puxe a corda em direção ao rosto, cotovelos altos e escápulas contraindo no final."
+      },
+      {
+        id: "crucifixo-inverso",
+        titulo: "Crucifixo inverso",
+        video: "./assets/videos/ombro.mp4",
+        inicio: 0,
+        grupo: "Ombros",
+        series: "3 séries x 12 a 15 repetições | descanso 60s",
+        desc: "Foque no posterior de ombro, braços abrindo com controle e pescoço relaxado."
+      },
+      {
+        id: "rotacao-externa",
+        titulo: "Rotação externa com cabo",
+        video: "./assets/videos/ombro.mp4",
+        inicio: 0,
+        grupo: "Ombros",
+        series: "3 séries x 12 por lado | descanso 45s",
+        desc: "Movimento curto e técnico para proteger ombros e melhorar estabilidade."
+      },
+      {
+        id: "abdominal-cabo",
+        titulo: "Abdominal no cabo",
+        video: "./assets/videos/ombro.mp4",
+        inicio: 0,
+        grupo: "Core",
+        nivelMin: "intermediario",
+        series: "3 séries x 12 repetições | descanso 60s",
+        desc: "Flexione o tronco sem puxar com os braços, sentindo o abdômen fechar o movimento."
+      },
+      {
+        id: "dead-bug",
+        titulo: "Dead bug",
+        video: "./assets/videos/ombro.mp4",
+        inicio: 0,
+        grupo: "Core",
+        nivelMin: "iniciante",
+        series: "3 séries x 8 a 10 por lado | descanso 45s",
+        desc: "Core seguro para coluna, com lombar estável no chão e movimento alternado de braços e pernas."
+      },
+      {
+        id: "elevacao-pernas-controlada",
+        titulo: "Elevação de pernas controlada",
+        video: "./assets/videos/ombro.mp4",
+        inicio: 0,
+        grupo: "Core",
+        nivelMin: "avancado",
+        experienciaMin: 18,
+        evitar: ["coluna"],
+        series: "4 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Exercício avançado de abdômen inferior. Use apenas se a lombar ficar estável durante toda a execução."
       }
     ]
   }
 ];
 
+const planoMuscularSemanal = [
+  {
+    diaLabel: "Segunda-feira",
+    titulo: "Pernas e glúteos",
+    desc: "Dia completo de inferiores, com máquinas, posterior, glúteo, panturrilha e cardio final.",
+    tags: ["Pernas", "75 min", "Força"],
+    filtro: "forca",
+    ids: [
+      "leg-press-45",
+      "cadeira-extensora",
+      "levantamento-romeno",
+      "panturrilha-leg",
+      "avanco-halteres"
+    ]
+  },
+  {
+    diaLabel: "Terça-feira",
+    titulo: "Peito",
+    desc: "Foco em peito com supinos, abertura, cabo e finalização para manter gasto calórico.",
+    tags: ["Peito", "65 min", "Força"],
+    filtro: "forca",
+    ids: [
+      "supino-reto",
+      "crossover-cabo"
+    ]
+  },
+  {
+    diaLabel: "Quarta-feira",
+    titulo: "Tríceps e ombros",
+    desc: "Tríceps na polia e movimentos guiados de ombro com execução técnica.",
+    tags: ["Superiores", "55 min", "Força"],
+    filtro: "forca",
+    ids: [
+      "triceps-polia-barra",
+      "desenvolvimento-militar",
+      "face-pull-corda"
+    ]
+  },
+  {
+    diaLabel: "Quinta-feira",
+    titulo: "Costas",
+    desc: "Puxadas e remadas para dorsal, postura e fortalecimento das escápulas.",
+    tags: ["Costas", "70 min", "Força"],
+    filtro: "forca",
+    ids: [
+      "puxada-frontal",
+      "remada-baixa"
+    ]
+  },
+  {
+    diaLabel: "Sexta-feira",
+    titulo: "Bíceps e core",
+    desc: "Rosca direta e estabilidade abdominal para fechar a semana com execução segura.",
+    tags: ["Bíceps", "45 min", "Força"],
+    filtro: "forca",
+    ids: [
+      "rosca-direta",
+      "prancha-abdominal"
+    ]
+  }
+];
+
 const videoRealPorExercicio = {
-  "supino-reto": "https://ymove.app/api/free/d09e0ed7-21dd-4f1c-b5cf-3e345e9304ec",
-  "crossover-cabo": "https://ymove.app/api/free/82760b28-30e2-4311-a4c5-42da40082079",
-  "triceps-polia-barra": "https://ymove.app/api/free/9a550e2c-c55e-495d-b59e-b676c3d48a41",
-  "puxada-frontal": "https://ymove.app/api/free/ed1ca95e-2642-4551-a477-17485e486bfc",
-  "remada-baixa": "https://ymove.app/api/free/499ccaa4-719d-40bd-b441-511291482471",
-  "rosca-direta": "https://ymove.app/api/free/998e8f21-2bda-49d8-a773-b59c316d022d",
-  "leg-press-45": "https://ymove.app/api/free/3dabdcc0-8639-4868-9e57-5afc621ed50d",
-  "cadeira-extensora": "https://ymove.app/api/free/3d0e78d0-1125-4d25-8bd4-9ca7ba3799e8",
-  "levantamento-romeno": "https://ymove.app/api/free/b7f3df3f-7371-4d29-bc59-3227fcdaa09a",
-  "panturrilha-leg": "https://ymove.app/api/free/94b73c60-81d0-4522-964e-ceacf89129cf",
-  "avanco-halteres": "https://ymove.app/api/free/166bf038-1670-4c52-9f32-cf6463556d99",
-  "prancha-cardio": "https://ymove.app/api/free/be8f26b0-4948-4f48-b851-1a9d2cfd953c",
-  "prancha-abdominal": "https://ymove.app/api/free/be8f26b0-4948-4f48-b851-1a9d2cfd953c",
-  "desenvolvimento-militar": "https://ymove.app/api/free/d725ad5a-e0dd-4fca-8b9e-0016aaa757a0",
-  "face-pull-corda": "https://ymove.app/api/free/0f7cf0c4-34fe-4cb3-993e-469be8004c2c"
+  "supino-reto": "./assets/videos/supino-reto.mp4",
+  "crossover-cabo": "./assets/videos/crossover-cabo.mp4",
+  "triceps-polia-barra": "./assets/videos/triceps-polia-barra.mp4",
+  "puxada-frontal": "./assets/videos/puxada-frontal.mp4",
+  "remada-baixa": "./assets/videos/remada-baixa.mp4",
+  "rosca-direta": "./assets/videos/rosca-direta.mp4",
+  "leg-press-45": "./assets/videos/leg-press-45.mp4",
+  "cadeira-extensora": "./assets/videos/cadeira-extensora.mp4",
+  "levantamento-romeno": "./assets/videos/levantamento-romeno.mp4",
+  "panturrilha-leg": "./assets/videos/panturrilha-leg-press.mp4",
+  "avanco-halteres": "./assets/videos/avanco-halteres.mp4",
+  "prancha-cardio": "./assets/videos/prancha-abdominal.mp4",
+  "prancha-abdominal": "./assets/videos/prancha-abdominal.mp4",
+  "desenvolvimento-militar": "./assets/videos/desenvolvimento-militar.mp4",
+  "face-pull-corda": "./assets/videos/face-pull-corda.mp4"
 };
 
 gruposExercicios.forEach((grupo) => {
@@ -303,6 +730,14 @@ function formatMetric(value, suffix = "", digits = 0, fallback = "--") {
   return `${number.toLocaleString("pt-BR", { minimumFractionDigits: digits, maximumFractionDigits: digits })}${suffix}`;
 }
 
+function escapeAttr(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
 function getFicha() {
   try {
     return JSON.parse(localStorage.getItem("acafFicha")) || null;
@@ -317,6 +752,30 @@ function getHistorico() {
   } catch {
     return [];
   }
+}
+
+function getCargaHistorico() {
+  try {
+    return JSON.parse(localStorage.getItem("acafCargaHistorico")) || {};
+  } catch {
+    return {};
+  }
+}
+
+function setCargaHistorico(historico) {
+  localStorage.setItem("acafCargaHistorico", JSON.stringify(historico));
+}
+
+function getRascunhosExercicios() {
+  try {
+    return JSON.parse(localStorage.getItem("acafRascunhosExercicios")) || {};
+  } catch {
+    return {};
+  }
+}
+
+function setRascunhosExercicios(rascunhos) {
+  localStorage.setItem("acafRascunhosExercicios", JSON.stringify(rascunhos));
 }
 
 function getRegistrosVisuais() {
@@ -335,12 +794,223 @@ function setHistorico(historico) {
   localStorage.setItem("acafHistorico", JSON.stringify(historico));
 }
 
+function getSeriesProgress() {
+  try {
+    return JSON.parse(localStorage.getItem("acafSeriesProgress")) || {};
+  } catch {
+    return {};
+  }
+}
+
+function setSeriesProgress(progress) {
+  localStorage.setItem("acafSeriesProgress", JSON.stringify(progress));
+}
+
+function getActivityLog() {
+  try {
+    return JSON.parse(localStorage.getItem("acafActivityLog")) || [];
+  } catch {
+    return [];
+  }
+}
+
+function registrarAtividade(exercicioId, tipo = "treino") {
+  const hoje = dataLocalKey();
+  const log = getActivityLog();
+  if (!log.some((item) => item.data === hoje && item.exercicioId === exercicioId && item.tipo === tipo)) {
+    log.push({ data: hoje, exercicioId, tipo, criadoEm: new Date().toISOString() });
+    localStorage.setItem("acafActivityLog", JSON.stringify(log.slice(-365)));
+  }
+}
+
+function quantidadeSeries(exercicio) {
+  const match = String(exercicio?.series || "").match(/(\d+)\s*s[eé]ries?/i);
+  return Math.max(1, safeNumber(match?.[1], 3));
+}
+
+function seriesConcluidas(id) {
+  return Math.max(0, safeNumber(getSeriesProgress()[id], 0));
+}
+
+function dataLocalKey(date = new Date()) {
+  const ano = date.getFullYear();
+  const mes = String(date.getMonth() + 1).padStart(2, "0");
+  const dia = String(date.getDate()).padStart(2, "0");
+  return `${ano}-${mes}-${dia}`;
+}
+
+function diasConcluidosDaSemana(historico = getHistorico()) {
+  const concluidos = new Set(historico);
+  return planoMuscularSemanal.map((grupo, index) => ({
+    index,
+    grupo,
+    concluido: grupo.ids.some((id) => concluidos.has(id))
+  }));
+}
+
+function progressoSemanal(ficha = getFicha(), historico = getHistorico()) {
+  const dias = diasConcluidosDaSemana(historico);
+  const planejados = treinosAtuais
+    .map((treino, index) => treino.ativo !== false ? index : null)
+    .filter((index) => index !== null);
+  const concluidos = planejados.filter((index) => dias[index]?.concluido);
+  return {
+    dias,
+    planejados,
+    concluidos,
+    total: Math.max(1, ficha ? Math.min(safeNumber(ficha.frequencia, 3), planejados.length || 5) : planejados.length || 5)
+  };
+}
+
+function descansoDoExercicio(exercicio) {
+  const texto = `${exercicio?.series || ""} ${exercicio?.desc || ""}`;
+  const match = texto.match(/descanso\s*(\d+)/i);
+  return match ? Math.max(15, safeNumber(match[1], 60)) : 60;
+}
+
+function calcularManutencao({ sexo, idade, peso, altura, frequencia }) {
+  const alturaCm = safeNumber(altura) * 100;
+  const base = 10 * safeNumber(peso) + 6.25 * alturaCm - 5 * safeNumber(idade);
+  const ajusteSexo = sexo === "feminino" ? -161 : sexo === "masculino" ? 5 : -78;
+  const fatorAtividade = safeNumber(frequencia, 3) >= 5 ? 1.65 : safeNumber(frequencia, 3) >= 4 ? 1.55 : 1.45;
+  return Math.round((base + ajusteSexo) * fatorAtividade);
+}
+
 function toast(message) {
   const el = $("toast");
   el.textContent = message;
   el.classList.add("show");
   clearTimeout(toast._timer);
   toast._timer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+function withButtonLoading(button, loadingLabel, action) {
+  if (!button || button.classList.contains("loading")) return;
+  const originalText = button.dataset.originalText || button.textContent;
+  button.dataset.originalText = originalText;
+  button.textContent = loadingLabel;
+  button.classList.add("loading");
+  button.setAttribute("aria-busy", "true");
+
+  setTimeout(() => {
+    try {
+      action();
+    } finally {
+      button.classList.remove("loading");
+      button.removeAttribute("aria-busy");
+      button.textContent = originalText;
+    }
+  }, 360);
+}
+
+function updateFileLabel(id, text) {
+  const el = $(id);
+  if (el) el.textContent = text;
+}
+
+function tagClass(text) {
+  const value = String(text || "").toLowerCase();
+  if (["peito", "costas", "pernas", "core", "ombros", "bíceps", "tríceps", "cardio"].some((item) => value.includes(item))) return "tag-group";
+  if (["iniciante", "intermediario", "intermediário", "avancado", "avançado", "controlado", "personal"].some((item) => value.includes(item))) return "tag-level";
+  if (value.includes("execução") || value.includes("guiada")) return "tag-guided";
+  return "tag-plan";
+}
+
+function adjustLogValue(button, field, delta) {
+  const card = button.closest(".exercise-card");
+  const input = card?.querySelector(`[data-log-field="${field}"]`);
+  if (!input) return;
+  const step = field === "carga" ? 2.5 : 1;
+  const current = safeNumber(String(input.value).replace(",", "."), 0);
+  const next = Math.max(0, current + delta * step);
+  input.value = field === "carga" && !Number.isInteger(next) ? next.toFixed(1) : String(next);
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
+function salvarRascunhoExercicio(id, input) {
+  const card = input.closest(".exercise-card");
+  if (!card) return;
+  const rascunhos = getRascunhosExercicios();
+  rascunhos[id] = {
+    carga: card.querySelector('[data-log-field="carga"]')?.value || "",
+    reps: card.querySelector('[data-log-field="reps"]')?.value || "",
+    obs: card.querySelector('[data-log-field="obs"]')?.value || ""
+  };
+  setRascunhosExercicios(rascunhos);
+}
+
+function registrarCargaExercicio(id, totalSeries = 1) {
+  const rascunhos = getRascunhosExercicios();
+  const rascunho = rascunhos[id];
+  if (!rascunho || (!rascunho.carga && !rascunho.reps && !rascunho.obs)) return;
+  const historico = getCargaHistorico();
+  const entradas = Array.isArray(historico[id]) ? historico[id] : [];
+  entradas.push({ ...rascunho, series: Math.max(1, safeNumber(totalSeries, 1)), data: new Date().toISOString() });
+  historico[id] = entradas.slice(-8);
+  setCargaHistorico(historico);
+  delete rascunhos[id];
+  setRascunhosExercicios(rascunhos);
+}
+
+function toggleSerieExercicio(id, numeroSerie, totalExibido, descansoExibido) {
+  const exercicio = gruposExercicios.flatMap((grupo) => grupo.exercicios).find((item) => item.id === id);
+  if (!exercicio) return;
+  const total = Math.max(1, safeNumber(totalExibido, quantidadeSeries(exercicio)));
+  const progress = getSeriesProgress();
+  const atual = Math.max(0, safeNumber(progress[id], 0));
+  const novo = numeroSerie <= atual ? numeroSerie - 1 : numeroSerie;
+  progress[id] = Math.min(total, Math.max(0, novo));
+  setSeriesProgress(progress);
+
+  let historico = getHistorico();
+  if (progress[id] >= total && !historico.includes(id)) {
+    registrarCargaExercicio(id, total);
+    historico.push(id);
+    setHistorico(historico);
+    registrarAtividade(id);
+    toast("Todas as séries concluídas. Exercício finalizado.");
+  } else if (progress[id] < total && historico.includes(id)) {
+    historico = historico.filter((item) => item !== id);
+    setHistorico(historico);
+  } else {
+    toast(`Série ${progress[id]} de ${total} concluída.`);
+  }
+
+  startTimer(Math.max(15, safeNumber(descansoExibido, descansoDoExercicio(exercicio))));
+  const ficha = getFicha();
+  if (ficha) atualizarInterface(ficha);
+}
+
+function carregarUltimaCarga(id, button) {
+  const entradas = getCargaHistorico()[id] || [];
+  const ultimo = entradas[entradas.length - 1];
+  const card = button.closest(".exercise-card");
+  if (!ultimo || !card) {
+    toast("Ainda não existe uma carga anterior para este exercício.");
+    return;
+  }
+  const carga = card.querySelector('[data-log-field="carga"]');
+  const reps = card.querySelector('[data-log-field="reps"]');
+  const obs = card.querySelector('[data-log-field="obs"]');
+  if (carga) carga.value = ultimo.carga || "";
+  if (reps) reps.value = ultimo.reps || "";
+  if (obs) obs.value = ultimo.obs || "";
+  salvarRascunhoExercicio(id, carga || reps || obs);
+  toast("Último registro carregado.");
+}
+
+function limparErrosPerfil() {
+  ["nome", "idade", "peso", "altura", "nivel"].forEach((id) => {
+    const input = $(id);
+    input?.classList.remove("field-invalid");
+    input?.closest("label")?.classList.remove("label-invalid");
+  });
+}
+
+function marcarErroPerfil(id) {
+  const input = $(id);
+  input?.classList.add("field-invalid");
+  input?.closest("label")?.classList.add("label-invalid");
 }
 
 function showScreen(section) {
@@ -371,10 +1041,10 @@ function classificarIMC(imc) {
   return "Obesidade";
 }
 
-function textoObjetivo(objetivo, peso, frequencia) {
+function textoObjetivo(objetivo, peso, frequencia, caloriasCalculadas = 0) {
   const pesoSeguro = safeNumber(peso, 0);
   const frequenciaSegura = Math.max(1, safeNumber(frequencia, 3));
-  const calorias = Math.round(pesoSeguro * 32);
+  const calorias = Math.max(1200, safeNumber(caloriasCalculadas, Math.round(pesoSeguro * 32)));
   const textos = {
     emagrecer: {
       plano: "Déficit calórico controlado",
@@ -410,12 +1080,64 @@ function objetivoLabel(value) {
   }[value] || value;
 }
 
+function diaCompleto(dia) {
+  return {
+    Segunda: "Segunda-feira",
+    Terça: "Terça-feira",
+    Quarta: "Quarta-feira",
+    Quinta: "Quinta-feira",
+    Sexta: "Sexta-feira"
+  }[dia] || dia;
+}
+
+function experienciaLabel(value) {
+  const meses = experienciaRank(value);
+  if (meses >= 18) return "mais de 18 meses de treino";
+  if (meses >= 6) return "6 a 18 meses de treino";
+  return "até 6 meses de treino";
+}
+
+function historicoLabel(value) {
+  const meses = experienciaRank(value);
+  if (meses >= 36) return "histórico de 3+ anos";
+  if (meses >= 24) return "histórico de 2+ anos";
+  if (meses >= 12) return "histórico de 1+ ano";
+  if (meses >= 6) return "histórico de 6+ meses";
+  return "sem histórico anterior";
+}
+
 function avatarMarkup(src, fallback) {
   return src ? `<img src="${src}" alt="${fallback}" />` : fallback.slice(0, 1).toUpperCase();
 }
 
+function nivelRank(nivel) {
+  return { iniciante: 1, intermediario: 2, avancado: 3 }[nivel] || 0;
+}
+
+function experienciaRank(experiencia) {
+  return safeNumber(experiencia, 0);
+}
+
+function historicoRank(ficha) {
+  return experienciaRank(ficha?.historicoTreino);
+}
+
+function experienciaEfetiva(ficha) {
+  return Math.max(experienciaRank(ficha?.experiencia), historicoRank(ficha));
+}
+
+function nivelTreinoRank(ficha) {
+  const base = nivelRank(ficha?.nivel);
+  const historico = historicoRank(ficha);
+  if (historico >= 36) return Math.max(base, 3);
+  if (historico >= 12) return Math.max(base, 2);
+  return base;
+}
+
 function nivelDoAluno(ficha) {
+  if (!ficha?.nivel) return "Nível a definir";
   if (ficha?.condicao && ficha.condicao !== "sem_restricao") return "Controlado";
+  if (experienciaRank(ficha.experiencia) < 6 && historicoRank(ficha) >= 12) return "Retorno";
   if (ficha?.nivel === "avancado") return "Avancado";
   if (ficha?.nivel === "intermediario") return "Intermediario";
   return "Iniciante";
@@ -423,7 +1145,10 @@ function nivelDoAluno(ficha) {
 
 function exercicioBloqueado(exercicio, ficha) {
   if (!ficha) return false;
-  if (ficha.nivel === "iniciante" && ["levantamento-romeno", "desenvolvimento-militar"].includes(exercicio.id)) return true;
+  if (exercicio.nivelMin && nivelTreinoRank(ficha) < nivelRank(exercicio.nivelMin)) return true;
+  if (exercicio.experienciaMin && experienciaEfetiva(ficha) < exercicio.experienciaMin) return true;
+  if (exercicio.evitar?.includes(ficha.condicao)) return true;
+  if (ficha.nivel === "iniciante" && historicoRank(ficha) < 12 && ["levantamento-romeno", "desenvolvimento-militar"].includes(exercicio.id)) return true;
   if (ficha.condicao === "ombro" && ["desenvolvimento-militar", "face-pull-corda"].includes(exercicio.id)) return true;
   if (ficha.condicao === "coluna" && ["levantamento-romeno"].includes(exercicio.id)) return true;
   return false;
@@ -432,18 +1157,70 @@ function exercicioBloqueado(exercicio, ficha) {
 function adaptarExercicio(exercicio, ficha) {
   if (!ficha) return { ...exercicio, dificuldade: "Personal" };
   const item = { ...exercicio, dificuldade: nivelDoAluno(ficha) };
+  if (item.grupo === "Cardio") {
+    item.series = ficha.objetivo === "emagrecer" || ficha.objetivo === "definir" ? "25 a 30 minutos | ritmo moderado" : "20 minutos | ritmo moderado";
+    if (ficha.objetivo === "resistencia") item.series = "25 a 30 minutos | zona confortável";
+    item.desc = `${item.desc} Finalizador do treino para sair do papel e acompanhar condicionamento no app.`;
+    if (ficha.nivel === "iniciante") item.series = "20 minutos | caminhada ou bike leve";
+    if (ficha.nivel === "iniciante" && historicoRank(ficha) >= 12) item.series = "20 a 25 minutos | esteira ou bike";
+    if (ficha.nivel === "avancado") item.series = "25 a 30 minutos | esteira inclinada ou bike";
+    if (ficha.condicao === "joelho") item.desc = `${item.desc} Prefira bicicleta quando o joelho estiver sensível.`;
+    if (ficha.condicao === "coluna") item.desc = `${item.desc} Mantenha postura alta e intensidade confortável.`;
+    return item;
+  }
   if (ficha.nivel === "iniciante") {
     item.series = "2 a 3 series x 10 a 12 repeticoes | descanso 60s";
     item.desc = `${item.desc} Carga leve, ritmo controlado e foco em aprender o movimento.`;
+  }
+  if (ficha.nivel === "iniciante" && item.grupo === "Cardio") {
+    item.series = "20 minutos | caminhada ou bike leve";
+  }
+  if (ficha.nivel === "iniciante" && historicoRank(ficha) >= 12) {
+    item.series = "3 series x 10 a 12 repeticoes | descanso 60s";
+    item.desc = `${item.desc} Perfil retornando: começa controlado, mas com volume maior que iniciante absoluto.`;
+  }
+  if (ficha.nivel === "iniciante" && historicoRank(ficha) >= 12 && item.grupo === "Cardio") {
+    item.series = "20 a 25 minutos | esteira ou bike";
   }
   if (ficha.nivel === "avancado") {
     item.series = item.series.replace(/^3/i, "4").replace(/^4/i, "5");
     item.desc = `${item.desc} Use progressao de carga sem perder amplitude e tecnica.`;
   }
+  if (ficha.nivel === "avancado" && item.grupo === "Cardio") {
+    item.series = "25 a 30 minutos | esteira inclinada ou bike";
+  }
+  if (ficha.nivel === "avancado" && experienciaEfetiva(ficha) >= 18) {
+    item.desc = `${item.desc} Bloco liberado para praticante experiente, com mais volume e controle de carga.`;
+  }
+  if (ficha.objetivo === "ganhar") {
+    item.series = ficha.nivel === "iniciante" && historicoRank(ficha) < 12 ? "3 séries x 8 a 12 repetições | descanso 75s" : "4 séries x 6 a 10 repetições | descanso 90s";
+    item.desc = `${item.desc} Objetivo de ganho: priorize carga progressiva, descanso completo e execução forte.`;
+  }
+  if (ficha.objetivo === "definir") {
+    item.series = ficha.nivel === "iniciante" && historicoRank(ficha) < 12 ? "3 séries x 10 a 12 repetições | descanso 60s" : "3 a 4 séries x 10 a 15 repetições | descanso 45 a 60s";
+    item.desc = `${item.desc} Objetivo de definição: mantenha controle, cadência e pausas mais curtas.`;
+  }
+  if (ficha.objetivo === "emagrecer") {
+    item.series = "3 séries x 12 a 15 repetições | descanso 45s";
+    item.desc = `${item.desc} Objetivo de emagrecimento: ritmo constante, carga segura e pouca pausa.`;
+  }
+  if (ficha.objetivo === "resistencia") {
+    item.series = "3 blocos x 15 a 20 repetições | descanso 30 a 45s";
+    item.desc = `${item.desc} Objetivo de resistência: movimento contínuo, respiração controlada e intensidade sustentável.`;
+  }
   if (ficha.condicao === "joelho" && item.grupo === "Pernas") item.desc = `${item.desc} Trabalhe sem dor no joelho e com amplitude confortavel.`;
   if (ficha.condicao === "ombro" && item.grupo !== "Cardio") item.desc = `${item.desc} Ombros baixos, escapulas controladas e sem amplitude dolorosa.`;
   if (ficha.condicao === "coluna") item.desc = `${item.desc} Coluna neutra, abdomen firme e carga conservadora.`;
   return item;
+}
+
+function volumePorPerfil(ficha) {
+  if (!ficha) return 8;
+  const efetiva = experienciaEfetiva(ficha);
+  if (ficha.nivel === "avancado" || efetiva >= 24) return 8;
+  if (ficha.nivel === "intermediario" || efetiva >= 12) return 7;
+  if (ficha.nivel === "iniciante" && historicoRank(ficha) >= 12) return 6;
+  return 5;
 }
 
 function posterDoVideo(url, grupo) {
@@ -463,6 +1240,14 @@ function posterDoVideo(url, grupo) {
 function ajustarTreinos(objetivo, nivel, frequencia, condicao) {
   const multiplicadorNivel = { iniciante: 0.88, intermediario: 1, avancado: 1.12 }[nivel] || 1;
   const diasPermitidos = Math.max(1, safeNumber(frequencia, 5));
+  const planejamento = {
+    1: [0],
+    2: [0, 3],
+    3: [0, 2, 4],
+    4: [0, 1, 2, 4],
+    5: [0, 1, 2, 3, 4]
+  };
+  const diasPlanejados = new Set(planejamento[Math.min(diasPermitidos, 5)] || planejamento[5]);
 
   return treinosBase.map((treino, index) => {
     const item = { ...treino, ...midiasOriginais[treino.dia] };
@@ -497,7 +1282,7 @@ function ajustarTreinos(objetivo, nivel, frequencia, condicao) {
       item.cuidado = "Priorize prancha, dead bug e exercícios sem flexão agressiva da coluna.";
     }
 
-    item.ativo = index < diasPermitidos;
+    item.ativo = diasPlanejados.has(index);
     return item;
   });
 }
@@ -508,33 +1293,49 @@ function gerarFicha() {
   const nome = $("nome").value.trim();
   const professorNome = $("professorNome").value.trim();
   const idade = safeNumber($("idade").value);
+  const sexo = $("sexo").value;
   const peso = safeNumber(String($("peso").value).replace(",", "."));
   const altura = safeNumber(String($("altura").value).replace(",", "."));
   const pesoMeta = safeNumber(String($("pesoMeta").value).replace(",", "."), NaN);
   const objetivo = $("objetivo").value;
   const nivel = $("nivel").value;
+  const experiencia = safeNumber($("experiencia").value, 0);
+  const historicoTreino = safeNumber($("historicoTreino").value, 0);
   const frequencia = Math.max(1, safeNumber($("frequencia").value, 3));
   const condicao = $("condicao").value;
 
-  if (!nome || idade < 10 || peso < 30 || altura < 1) {
-    toast("Preencha nome, idade, peso e altura para gerar sua ficha.");
+  limparErrosPerfil();
+  const camposInvalidos = [];
+  if (!nome) camposInvalidos.push("nome");
+  if (idade < 10 || idade > 90) camposInvalidos.push("idade");
+  if (peso < 30) camposInvalidos.push("peso");
+  if (altura < 1 || altura > 2.5) camposInvalidos.push("altura");
+  if (!nivel) camposInvalidos.push("nivel");
+
+  if (camposInvalidos.length) {
+    camposInvalidos.forEach(marcarErroPerfil);
+    toast("Preencha nome, idade, peso, altura e nível para gerar sua ficha.");
     showScreen("perfil");
+    $(camposInvalidos[0])?.focus();
     return;
   }
 
   const imc = altura > 0 ? peso / (altura * altura) : 0;
   const agua = peso * 0.035;
   const proteina = peso * 2;
-  const calorias = Math.round(peso * 32);
-  const plano = textoObjetivo(objetivo, peso, frequencia);
+  const calorias = calcularManutencao({ sexo, idade, peso, altura, frequencia });
+  const plano = textoObjetivo(objetivo, peso, frequencia, calorias);
 
   const ficha = {
     nome,
     idade,
+    sexo,
     peso,
     altura,
     objetivo,
     nivel,
+    experiencia,
+    historicoTreino,
     frequencia,
     condicao,
     tipoUsuario,
@@ -568,17 +1369,20 @@ function atualizarInterface(ficha) {
     peso: safeNumber(ficha?.peso),
     idade: safeNumber(ficha?.idade),
     altura: safeNumber(ficha?.altura, 1),
+    experiencia: safeNumber(ficha?.experiencia),
+    historicoTreino: safeNumber(ficha?.historicoTreino),
     frequencia: Math.max(1, safeNumber(ficha?.frequencia, 3)),
     imc: safeNumber(ficha?.imc),
     agua: safeNumber(ficha?.agua),
     proteina: safeNumber(ficha?.proteina),
     calorias: safeNumber(ficha?.calorias)
   };
-  const plano = textoObjetivo(ficha.objetivo, ficha.peso, ficha.frequencia);
+  const plano = textoObjetivo(ficha.objetivo, ficha.peso, ficha.frequencia, ficha.calorias);
   const historico = getHistorico();
-  const concluidos = historico.length;
+  const semana = progressoSemanal(ficha, historico);
+  const concluidos = semana.concluidos.length;
   const progresso = Math.round((concluidos / Math.max(1, ficha.frequencia)) * 100) || 0;
-  const treinoHoje = treinosAtuais.find((treino) => treino.ativo !== false && !historico.includes(treino.dia)) || treinosAtuais.find((treino) => treino.ativo !== false);
+  const treinoHoje = treinosAtuais.find((treino, index) => treino.ativo !== false && !semana.dias[index]?.concluido) || treinosAtuais.find((treino) => treino.ativo !== false);
   const professorNome = ficha.professorNome || "Responsavel tecnico";
   const pesoAtualVisual = pesoAtualDaEvolucao(ficha);
   const metaTexto = ficha.pesoMeta ? `Meta: ${Number(ficha.pesoMeta).toFixed(1)} kg | atual: ${Number(pesoAtualVisual).toFixed(1)} kg` : "Defina uma meta de peso no Perfil.";
@@ -592,7 +1396,7 @@ function atualizarInterface(ficha) {
   $("planoSidebar").textContent = `${ficha.nome} ativo`;
   $("sidebarResumo").textContent = plano.plano;
   $("mPeso").textContent = formatMetric(ficha.peso, " kg", 1);
-  $("mPesoMsg").textContent = `${ficha.idade} anos | ${ficha.nivel}`;
+  $("mPesoMsg").textContent = `${ficha.idade} anos | ${ficha.nivel} | ${experienciaLabel(ficha.experiencia)} | ${historicoLabel(ficha.historicoTreino)}`;
   $("mImc").textContent = formatMetric(ficha.imc, "", 1);
   $("mImcMsg").textContent = classificarIMC(ficha.imc);
   $("mAgua").textContent = formatMetric(ficha.agua, " L", 2);
@@ -605,7 +1409,7 @@ function atualizarInterface(ficha) {
   $("resultadoTitulo").textContent = `${ficha.nome}, sua ficha ACAF está pronta.`;
   $("resultadoTexto").textContent = plano.texto;
   $("dataFicha").textContent = `Atualizada em ${ficha.data}`;
-  $("treinoHojeTitulo").textContent = treinoHoje ? `${treinoHoje.dia}: ${treinoHoje.titulo}` : "Semana concluída com sucesso.";
+  $("treinoHojeTitulo").textContent = treinoHoje ? `${diaCompleto(treinoHoje.dia)} · ${treinoHoje.titulo}` : "Semana concluída com sucesso.";
   $("treinoHojeTexto").textContent = treinoHoje ? `${treinoHoje.series}. ${treinoHoje.cuidado}` : "Reinicie a semana para começar uma nova sequência.";
 
   $("recomendacoes").innerHTML = plano.rec
@@ -629,6 +1433,8 @@ function atualizarInterface(ficha) {
   renderGrafico();
   renderMetas();
   renderRegistrosVisuais();
+  renderConquistas();
+  renderTrainingAnalytics();
 }
 
 function atualizarScore(percent) {
@@ -642,72 +1448,132 @@ function atualizarScore(percent) {
 }
 
 function renderTreinos() {
+  if (videoPreviewObserver) videoPreviewObserver.disconnect();
   const ficha = getFicha();
   const historico = getHistorico();
-  const usados = new Set();
-  const videosUsados = new Set();
-  const grupos = gruposExercicios
-    .map((grupo) => ({
-      ...grupo,
-      exercicios: grupo.exercicios
+  if (!ficha) {
+    exerciciosAtuais = [];
+    $("listaTreinos").innerHTML = `
+      <section class="training-empty">
+        <span class="empty-icon" aria-hidden="true">+</span>
+        <span class="eyebrow">Treino personalizado</span>
+        <h3>Você ainda não possui um treino montado</h3>
+        <p>Preencha seu perfil para o ACAF montar os dias, exercícios, descansos e metas conforme seu objetivo.</p>
+        <button class="primary" type="button" onclick="showScreen('perfil')">Gerar minha ficha</button>
+      </section>
+    `;
+    return;
+  }
+  const exerciciosPorId = gruposExercicios
+    .flatMap((grupo) => grupo.exercicios)
+    .reduce((mapa, exercicio) => {
+      mapa[exercicio.id] = exercicio;
+      return mapa;
+    }, {});
+  const grupos = planoMuscularSemanal
+    .map((grupo, groupIndex) => {
+      const candidatos = grupo.ids
+        .map((id) => exerciciosPorId[id])
+        .filter(Boolean)
+        .filter((exercicio) => Boolean(videoRealPorExercicio[exercicio.id]))
         .filter((exercicio) => !exercicioBloqueado(exercicio, ficha))
         .map((exercicio) => adaptarExercicio(exercicio, ficha))
         .filter((exercicio) => {
           const passaFiltro = filtroAtual === "todos" || grupo.filtro === filtroAtual || exercicio.grupo.toLowerCase() === filtroAtual;
-          if (!passaFiltro || usados.has(exercicio.id) || videosUsados.has(exercicio.video)) return false;
-          usados.add(exercicio.id);
-          videosUsados.add(exercicio.video);
-          return true;
-        })
-    }))
+          return passaFiltro;
+        });
+      const maxMusculacao = volumePorPerfil(ficha);
+      const musculacao = candidatos.filter((exercicio) => exercicio.grupo !== "Cardio").slice(0, maxMusculacao);
+      const cardio = candidatos.filter((exercicio) => exercicio.grupo === "Cardio").slice(0, 1);
+      const exercicios = filtroAtual === "cardio" ? cardio : [...musculacao, ...cardio];
+
+      return {
+        ...grupo,
+        planejado: treinosAtuais[groupIndex]?.ativo !== false,
+        exercicios
+      };
+    })
     .filter((grupo) => grupo.exercicios.length);
 
   exerciciosAtuais = grupos.flatMap((grupo) => grupo.exercicios);
 
   $("listaTreinos").innerHTML = grupos.map((grupo) => `
-    <section class="training-section">
+    <section class="training-section ${grupo.planejado ? "" : "training-off"}">
       <div class="training-head">
         <div>
-          <h4>${grupo.titulo}</h4>
-          <p>${grupo.desc}</p>
-          <div class="tags">${grupo.tags.map((tag) => `<span>${tag}</span>`).join("")}</div>
+          <span class="day-chip">${grupo.planejado ? "Planejado" : "Extra"} da semana</span>
+          <h4 class="day-title">${grupo.diaLabel} · ${grupo.titulo}</h4>
+          <p><strong>${grupo.titulo}</strong> · ${grupo.desc}</p>
+          <small class="training-summary">${grupo.exercicios.filter((item) => item.grupo !== "Cardio").length} exercícios de musculação + ${grupo.exercicios.some((item) => item.grupo === "Cardio") ? "cardio 20 a 30 min" : "sem cardio neste filtro"}</small>
+          <div class="tags">${grupo.tags.map((tag) => `<span class="${tagClass(tag)}">${tag}</span>`).join("")}</div>
         </div>
       </div>
       <div class="exercise-grid">
         ${grupo.exercicios.map((exercicio) => {
           const index = exerciciosAtuais.findIndex((item) => item.id === exercicio.id);
           const concluido = historico.includes(exercicio.id);
+          const rascunho = getRascunhosExercicios()[exercicio.id] || {};
+          const entradasCarga = getCargaHistorico()[exercicio.id] || [];
+          const ultimaCarga = entradasCarga[entradasCarga.length - 1];
+          const totalSeries = quantidadeSeries(exercicio);
+          const seriesFeitas = seriesConcluidas(exercicio.id);
 
           const videoComTempo = `${exercicio.video}#t=${Math.max(0.15, exercicio.inicio || 0)}`;
 
           return `
-            <article class="exercise-card ${concluido ? "done concluido" : ""}">
-              <div class="media exercise-media" onmouseenter="previewVideo(this)" onmouseleave="pararPreview(this)">
-                <video muted loop autoplay controls playsinline preload="auto" poster="${posterDoVideo(exercicio.video, exercicio.grupo)}" data-start="${exercicio.inicio || 0}" data-grupo="${exercicio.grupo}" data-nome="${exercicio.video.replace("./assets/videos/", "")}" onloadedmetadata="prepararVideoTreino(this)" onloadeddata="prepararVideoTreino(this)" oncanplay="previewVideo(this.closest('.media'))" onerror="videoPreviewErro(this)">
+            <article class="exercise-card ${exercicio.grupo === "Cardio" ? "cardio-finisher" : ""} ${concluido ? "done concluido" : ""}">
+              <div class="completion-badge" aria-hidden="true">✓</div>
+              <div class="media exercise-media">
+                <video muted loop playsinline controls preload="none" poster="${posterDoVideo(exercicio.video, exercicio.grupo)}" data-start="${exercicio.inicio || 0}" data-grupo="${exercicio.grupo}" data-nome="${exercicio.video.replace("./assets/videos/", "")}" onloadedmetadata="prepararVideoTreino(this)" onerror="videoPreviewErro(this)">
                   <source src="${videoComTempo}" type="video/mp4" />
                 </video>
                 <span class="play-mark">▶</span>
               </div>
 
               <div class="exercise-body">
-                <button class="plus" type="button" aria-label="Adicionar registro">+</button>
+                <span class="exercise-day">${grupo.diaLabel}</span>
                 <h4>${exercicio.titulo}</h4>
                 <strong>${exercicio.series}</strong>
                 <div class="tags">
-                  <span>${exercicio.grupo}</span>
-                  <span>${exercicio.dificuldade}</span>
-                  <span>Execução guiada</span>
+                  <span class="tag-group">${exercicio.grupo}</span>
+                  <span class="tag-level">${exercicio.dificuldade}</span>
+                  <span class="${exercicio.grupo === "Cardio" ? "tag-plan" : "tag-guided"}">${exercicio.grupo === "Cardio" ? "Finalização 20-30 min" : "Execução guiada"}</span>
                 </div>
                 <p>${exercicio.desc}</p>
+                <div class="series-control" aria-label="Controle rápido de séries">
+                  <span>Séries</span>
+                  <div>
+                    ${Array.from({ length: totalSeries }, (_, serieIndex) => {
+                      const numero = serieIndex + 1;
+                      return `<button class="${numero <= seriesFeitas ? "series-done" : ""}" type="button" onclick="toggleSerieExercicio('${exercicio.id}', ${numero}, ${totalSeries}, ${descansoDoExercicio(exercicio)})" aria-label="Marcar série ${numero}">${numero <= seriesFeitas ? "✓" : numero}</button>`;
+                    }).join("")}
+                  </div>
+                  <small>${seriesFeitas}/${totalSeries} concluídas</small>
+                </div>
                 <div class="exercise-actions">
                   <button class="watch" onclick="abrirVideo(${index})" type="button">▶ Abrir vídeo</button>
-                  <button class="complete" onclick="toggleTreino('${exercicio.id}')" type="button">${concluido ? "Desfazer" : "Concluir"}</button>
+                  <button class="complete" onclick="toggleTreino('${exercicio.id}')" type="button">${concluido ? "Concluído" : "Concluir Exercício"}</button>
                 </div>
                 <div class="log-grid">
-                  <label>CARGA<input type="text" placeholder="kg"></label>
-                  <label>REPS<input type="text" placeholder="feitas"></label>
-                  <label>OBS<input type="text" placeholder="ex: fácil, pesado, dor..."></label>
+                  <label>CARGA
+                    <span class="step-input">
+                      <button type="button" onclick="adjustLogValue(this, 'carga', -1)" aria-label="Diminuir carga">−</button>
+                      <input data-log-field="carga" type="number" inputmode="decimal" placeholder="kg" step="2.5" min="0" value="${escapeAttr(rascunho.carga)}" oninput="salvarRascunhoExercicio('${exercicio.id}', this)">
+                      <button type="button" onclick="adjustLogValue(this, 'carga', 1)" aria-label="Aumentar carga">+</button>
+                    </span>
+                  </label>
+                  <label>REPS
+                    <span class="step-input">
+                      <button type="button" onclick="adjustLogValue(this, 'reps', -1)" aria-label="Diminuir repetições">−</button>
+                      <input data-log-field="reps" type="number" inputmode="numeric" placeholder="feitas" step="1" min="0" value="${escapeAttr(rascunho.reps)}" oninput="salvarRascunhoExercicio('${exercicio.id}', this)">
+                      <button type="button" onclick="adjustLogValue(this, 'reps', 1)" aria-label="Aumentar repetições">+</button>
+                    </span>
+                  </label>
+                  <label>OBS<input data-log-field="obs" type="text" placeholder="ex: fácil, pesado, dor..." value="${escapeAttr(rascunho.obs)}" oninput="salvarRascunhoExercicio('${exercicio.id}', this)"></label>
                 </div>
+                <button class="load-history" type="button" onclick="carregarUltimaCarga('${exercicio.id}', this)" ${ultimaCarga ? "" : "disabled"}>
+                  ${ultimaCarga ? `↺ Último treino: ${escapeAttr(ultimaCarga.carga || "--")} kg · ${escapeAttr(ultimaCarga.reps || "--")} reps` : "↺ Sem carga anterior"}
+                </button>
               </div>
             </article>
           `;
@@ -715,18 +1581,36 @@ function renderTreinos() {
       </div>
     </section>
   `).join("");
+  requestAnimationFrame(iniciarPreviewsVisiveis);
 }
 
 function toggleTreino(dia) {
   const ficha = getFicha();
+  if (!ficha) {
+    showScreen("perfil");
+    toast("Gere sua ficha antes de concluir exercícios.");
+    return;
+  }
   let historico = getHistorico();
+  const exercicio = gruposExercicios.flatMap((grupo) => grupo.exercicios).find((item) => item.id === dia);
 
   if (historico.includes(dia)) {
     historico = historico.filter((item) => item !== dia);
+    const progress = getSeriesProgress();
+    progress[dia] = 0;
+    setSeriesProgress(progress);
     toast("Conclusão removida.");
   } else {
+    const totalSeries = quantidadeSeries(exercicio);
+    registrarCargaExercicio(dia, totalSeries);
     historico.push(dia);
-    toast("Treino concluído. Progresso atualizado.");
+    const progress = getSeriesProgress();
+    progress[dia] = totalSeries;
+    setSeriesProgress(progress);
+    registrarAtividade(dia);
+    const descanso = descansoDoExercicio(exercicio);
+    startTimer(descanso);
+    toast(`Exercício concluído. Descanso de ${descanso}s iniciado.`);
   }
 
   setHistorico(historico);
@@ -744,7 +1628,11 @@ function previewVideo(box) {
   const video = box.querySelector("video");
   if (!video) return;
   video.style.opacity = "1";
-  video.play().catch(() => {});
+  video.muted = true;
+  video.playsInline = true;
+  video.play().catch(() => {
+    video.controls = true;
+  });
 }
 
 function pararPreview(box) {
@@ -789,6 +1677,50 @@ function videoPreviewErro(video) {
   }
 }
 
+function iniciarPreviewsVisiveis() {
+  if (videoPreviewObserver) videoPreviewObserver.disconnect();
+  const videos = [...document.querySelectorAll("#listaTreinos .exercise-media video")];
+  if (!videos.length) return;
+
+  videoPreviewObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target;
+      video.dataset.previewVisible = entry.isIntersecting && entry.intersectionRatio >= 0.35 ? "1" : "0";
+      if (video.dataset.previewVisible === "0") {
+        video.pause();
+        video.closest(".exercise-media")?.classList.remove("is-playing");
+      }
+    });
+    requestAnimationFrame(() => {
+      const centroTela = window.innerHeight / 2;
+      const visiveis = videos
+        .filter((video) => video.dataset.previewVisible === "1")
+        .sort((a, b) => {
+          const centroA = a.getBoundingClientRect().top + a.getBoundingClientRect().height / 2;
+          const centroB = b.getBoundingClientRect().top + b.getBoundingClientRect().height / 2;
+          return Math.abs(centroA - centroTela) - Math.abs(centroB - centroTela);
+        });
+      videos.forEach((video) => {
+        if (video === visiveis[0]) {
+          video.muted = true;
+          video.playsInline = true;
+          video.style.opacity = "1";
+          video.play()
+            .then(() => video.closest(".exercise-media")?.classList.add("is-playing"))
+            .catch(() => {
+              video.controls = true;
+            });
+        } else {
+          video.pause();
+          video.closest(".exercise-media")?.classList.remove("is-playing");
+        }
+      });
+    });
+  }, { threshold: [0, 0.35, 0.7] });
+
+  videos.forEach((video) => videoPreviewObserver.observe(video));
+}
+
 function abrirVideo(index) {
   const treino = exerciciosAtuais[index] || treinosAtuais[index];
   if (!treino) return;
@@ -818,44 +1750,270 @@ function fecharVideo() {
   $("modalVideo").classList.remove("show");
 }
 
+async function abrirVideoFlutuante() {
+  const video = $("videoPlayer");
+  if (!document.pictureInPictureEnabled || !video.requestPictureInPicture) {
+    toast("A janela flutuante não é compatível com este navegador.");
+    return;
+  }
+  try {
+    if (document.pictureInPictureElement) {
+      await document.exitPictureInPicture();
+    } else {
+      await video.requestPictureInPicture();
+    }
+  } catch {
+    toast("Inicie o vídeo e tente abrir a janela flutuante novamente.");
+  }
+}
+
+function exportarRelatorio() {
+  const ficha = getFicha();
+  if (!ficha) {
+    showScreen("perfil");
+    toast("Gere sua ficha antes de exportar o relatório.");
+    return;
+  }
+  const dados = dadosDePerformance();
+  const registros = getRegistrosVisuais().sort((a, b) => new Date(a.data) - new Date(b.data));
+  const melhor = dados.reduce((max, item) => item.oneRm > max.oneRm ? item : max, { oneRm: 0, titulo: "--" });
+  const volume = dados.reduce((total, item) => total + item.volume, 0);
+  const semana = progressoSemanal(ficha, getHistorico());
+  const fotos = [registros[0], registros[registros.length - 1]].filter(Boolean);
+  let report = $("printReport");
+  if (!report) {
+    report = document.createElement("section");
+    report.id = "printReport";
+    report.className = "print-report";
+    document.body.appendChild(report);
+  }
+  report.innerHTML = `
+    <header><strong>ACAF</strong><span>Relatório de performance</span></header>
+    <h1>${escapeAttr(ficha.nome)}</h1>
+    <p>Emitido em ${new Date().toLocaleDateString("pt-BR")} · Objetivo: ${objetivoLabel(ficha.objetivo)} · Nível: ${escapeAttr(ficha.nivel)}</p>
+    <div class="print-metrics">
+      <article><span>Peso atual</span><strong>${formatMetric(pesoAtualDaEvolucao(ficha), " kg", 1)}</strong></article>
+      <article><span>Treinos da semana</span><strong>${semana.concluidos.length}/${semana.total}</strong></article>
+      <article><span>Melhor 1RM</span><strong>${melhor.oneRm ? `${melhor.oneRm.toFixed(1)} kg` : "--"}</strong><small>${escapeAttr(melhor.titulo)}</small></article>
+      <article><span>Volume registrado</span><strong>${Math.round(volume).toLocaleString("pt-BR")} kg</strong></article>
+      <article><span>Sequência</span><strong>${calcularSequencia()} dias</strong></article>
+    </div>
+    <h2>Conquistas</h2>
+    <p>${conquistasAtuais().filter((item) => item.liberada).map((item) => item.nome).join(" · ") || "Nenhuma conquista desbloqueada ainda."}</p>
+    <h2>Evolução visual</h2>
+    <div class="print-photos">${fotos.map((registro) => `<figure><img src="${registro.foto}" alt="Evolução"><figcaption>${formatarData(registro.data)} · ${registro.peso} kg</figcaption></figure>`).join("") || "<p>Sem fotos registradas.</p>"}</div>
+    <footer>ACAF Centro de Performance · Documento de acompanhamento pessoal</footer>
+  `;
+  window.print();
+}
+
 function renderGrafico() {
+  const ficha = getFicha();
+  if (!ficha) {
+    $("grafico").innerHTML = `
+      <div class="chart-empty">
+        <strong>Aguardando perfil</strong>
+        <span>O gráfico será liberado depois que sua ficha definir os dias planejados.</span>
+      </div>
+    `;
+    $("totalSemana").textContent = "Aguardando";
+    return;
+  }
   const historico = getHistorico();
   const maxKcal = Math.max(...treinosAtuais.map((t) => t.kcal), 1);
-  const totalAtivos = Math.max(1, treinosAtuais.filter((t) => t.ativo !== false).length);
-  const concluidos = Math.min(historico.length, totalAtivos);
+  const semana = progressoSemanal(ficha, historico);
 
   $("grafico").innerHTML = treinosAtuais.map((treino, index) => {
-    const concluido = historico.includes(treino.dia) || index < concluidos;
+    const concluido = semana.dias[index]?.concluido;
     const altura = treino.ativo !== false ? Math.max(22, Math.round((treino.kcal / maxKcal) * 100)) : 14;
     return `
-      <div class="bar ${concluido ? "bar-done" : ""}" style="height:${altura}%">
+      <div class="bar ${concluido ? "bar-done" : ""} ${treino.ativo === false ? "bar-extra" : ""}" data-height="${altura}">
         <strong>${concluido ? treino.kcal : 0}</strong>
         <span>${treino.dia.slice(0, 3)}</span>
       </div>
     `;
   }).join("");
+  $("grafico").querySelectorAll(".bar").forEach((bar) => {
+    bar.style.height = `${bar.dataset.height}%`;
+  });
 
-  $("totalSemana").textContent = `${concluidos}/${totalAtivos}`;
+  $("totalSemana").textContent = `${semana.concluidos.length}/${semana.total}`;
+}
+
+function calcularSequencia() {
+  const dias = [...new Set(getActivityLog().map((item) => item.data))].sort().reverse();
+  if (!dias.length) return 0;
+  let cursor = new Date();
+  const hoje = dataLocalKey(cursor);
+  cursor.setDate(cursor.getDate() - 1);
+  const ontem = dataLocalKey(cursor);
+  if (!dias.includes(hoje) && !dias.includes(ontem)) return 0;
+  cursor = new Date(`${dias.includes(hoje) ? hoje : ontem}T12:00:00`);
+  let streak = 0;
+  while (dias.includes(dataLocalKey(cursor))) {
+    streak += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}
+
+function conquistasAtuais() {
+  const cargas = Object.values(getCargaHistorico()).flat();
+  const semana = progressoSemanal(getFicha(), getHistorico());
+  const streak = calcularSequencia();
+  return [
+    { nome: "Primeiro passo", liberada: getActivityLog().length > 0 },
+    { nome: "Ritmo 3 dias", liberada: streak >= 3 },
+    { nome: "Clube dos 100 kg", liberada: cargas.some((item) => safeNumber(item.carga) >= 100) },
+    { nome: "Semana completa", liberada: getFicha() && semana.concluidos.length >= semana.total },
+    { nome: "Evolução visual", liberada: getRegistrosVisuais().length >= 2 }
+  ];
+}
+
+function renderConquistas() {
+  const target = $("badgeList");
+  if (!target) return;
+  const streak = calcularSequencia();
+  $("streakValue").textContent = `${streak} ${streak === 1 ? "dia" : "dias"}`;
+  $("streakIcon").textContent = streak >= 3 ? "◆" : "○";
+  $("streakIcon").classList.toggle("streak-hot", streak >= 3);
+  const conquistas = conquistasAtuais();
+  target.innerHTML = conquistas.map((item) => `
+    <span class="${item.liberada ? "earned-badge" : "locked-badge"}">${item.liberada ? "✓" : "○"} ${item.nome}</span>
+  `).join("");
+}
+
+function pontosGrafico(valores, width = 600, height = 170) {
+  if (!valores.length) return "";
+  const min = Math.min(...valores);
+  const max = Math.max(...valores);
+  const range = Math.max(1, max - min);
+  return valores.map((valor, index) => {
+    const x = valores.length === 1 ? width / 2 : (index / (valores.length - 1)) * width;
+    const y = height - 14 - ((valor - min) / range) * (height - 28);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+}
+
+function dadosDePerformance() {
+  const catalogo = gruposExercicios.flatMap((grupo) => grupo.exercicios);
+  const entradas = [];
+  Object.entries(getCargaHistorico()).forEach(([id, registros]) => {
+    const exercicio = catalogo.find((item) => item.id === id);
+    (registros || []).forEach((registro) => {
+      const carga = safeNumber(registro.carga);
+      const reps = safeNumber(registro.reps);
+      const series = Math.max(1, safeNumber(registro.series, quantidadeSeries(exercicio)));
+      if (!carga || !reps) return;
+      entradas.push({
+        id,
+        titulo: exercicio?.titulo || id,
+        data: registro.data,
+        carga,
+        reps,
+        series,
+        oneRm: carga * (1 + reps / 30),
+        volume: carga * reps * series
+      });
+    });
+  });
+  return entradas.sort((a, b) => new Date(a.data) - new Date(b.data));
+}
+
+function renderMiniChart(targetId, valores, corClass, vazio) {
+  const target = $(targetId);
+  if (!target) return;
+  if (!valores.length) {
+    target.innerHTML = `<div class="analytics-empty">${vazio}</div>`;
+    return;
+  }
+  const recentes = valores.slice(-8);
+  const pointString = pontosGrafico(recentes);
+  const pointClass = corClass === "analytics-force-line" ? "analytics-force-point" : "analytics-volume-point";
+  target.innerHTML = `
+    <svg viewBox="0 0 600 170" role="img" aria-label="${vazio}">
+      <polyline class="${corClass}" points="${pointString}"></polyline>
+      ${pointString.split(" ").map((point) => {
+        const [cx, cy] = point.split(",");
+        return `<circle class="${pointClass}" cx="${cx}" cy="${cy}" r="7"></circle>`;
+      }).join("")}
+    </svg>
+    <div class="analytics-values">${recentes.map((valor) => `<span>${Math.round(valor).toLocaleString("pt-BR")}</span>`).join("")}</div>
+  `;
+}
+
+function renderTrainingCalendar() {
+  const target = $("trainingCalendar");
+  if (!target) return;
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth();
+  const primeiroDia = new Date(ano, mes, 1).getDay();
+  const totalDias = new Date(ano, mes + 1, 0).getDate();
+  const ativos = new Set(getActivityLog().map((item) => item.data));
+  $("calendarMonth").textContent = hoje.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+  const celulas = [];
+  for (let vazio = 0; vazio < primeiroDia; vazio += 1) celulas.push('<span class="calendar-empty"></span>');
+  for (let dia = 1; dia <= totalDias; dia += 1) {
+    const data = dataLocalKey(new Date(ano, mes, dia));
+    const classeHoje = dia === hoje.getDate() ? "calendar-today" : "";
+    const classeAtivo = ativos.has(data) ? "calendar-trained" : "";
+    celulas.push(`<span class="${classeHoje} ${classeAtivo}" title="${ativos.has(data) ? "Treino realizado" : "Sem treino registrado"}">${dia}</span>`);
+  }
+  target.innerHTML = `
+    ${["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].map((dia) => `<strong>${dia}</strong>`).join("")}
+    ${celulas.join("")}
+  `;
+}
+
+function renderTrainingAnalytics() {
+  const dados = dadosDePerformance();
+  const melhor = dados.reduce((max, item) => item.oneRm > max.oneRm ? item : max, { oneRm: 0, titulo: "" });
+  const volume = dados.reduce((total, item) => total + item.volume, 0);
+  const series = dados.reduce((total, item) => total + item.series, 0);
+  if ($("bestOneRm")) $("bestOneRm").textContent = melhor.oneRm ? `${melhor.oneRm.toFixed(1)} kg · ${melhor.titulo}` : "Aguardando carga";
+  if ($("totalVolume")) $("totalVolume").textContent = `${Math.round(volume).toLocaleString("pt-BR")} kg`;
+  if ($("totalSets")) $("totalSets").textContent = String(series);
+  renderMiniChart("strengthChart", dados.map((item) => item.oneRm), "analytics-force-line", "Registre carga e repetições para acompanhar força.");
+  renderMiniChart("volumeChart", dados.map((item) => item.volume), "analytics-volume-line", "Conclua séries com carga para calcular volume.");
+  renderTrainingCalendar();
 }
 
 function renderMetas() {
   const ficha = getFicha();
+  if (!ficha) {
+    $("metasGrid").innerHTML = `
+      <article class="goals-empty">
+        <span class="eyebrow">Metas personalizadas</span>
+        <h3>Aguardando seu perfil</h3>
+        <p>Preencha peso, objetivo e frequência para calcular treinos, água, proteína e gasto calórico.</p>
+        <button class="primary" type="button" onclick="showScreen('perfil')">Preencher perfil</button>
+      </article>
+    `;
+    return;
+  }
   const historico = getHistorico();
   const frequencia = Math.max(1, safeNumber(ficha?.frequencia, 5));
-  const kcalPorDia = Math.round(treinosAtuais.reduce((acc, t) => acc + safeNumber(t.kcal), 0) / Math.max(1, treinosAtuais.length));
-  const kcal = Math.max(
-    treinosAtuais.filter((t) => historico.includes(t.dia)).reduce((acc, t) => acc + safeNumber(t.kcal), 0),
-    Math.min(historico.length, frequencia) * kcalPorDia
-  );
-  const volume = historico.length * 12;
+  const semana = progressoSemanal(ficha, historico);
+  const concluidosSemana = semana.concluidos.length;
+  const metaCalorias = Math.max(1, safeNumber(ficha?.calorias, 1800));
+  const kcal = semana.concluidos.reduce((total, index) => total + safeNumber(treinosAtuais[index]?.kcal), 0);
+  const volume = concluidosSemana * 12;
   const pesoAtual = ficha ? pesoAtualDaEvolucao(ficha) : 0;
   const pesoInicial = Number(ficha?.peso || 0);
   const pesoMeta = Number(ficha?.pesoMeta || 0);
   const deltaPeso = pesoInicial && pesoAtual ? pesoAtual - pesoInicial : 0;
   const pesoPerdido = Math.max(0, -deltaPeso);
+  const pesoGanho = Math.max(0, deltaPeso);
+  const pesoRestante = pesoMeta ? Math.max(0, Math.abs(pesoMeta - pesoAtual)) : 0;
+  const objetivoGanho = ficha?.objetivo === "ganhar";
   const metaBatida = pesoMeta ? (ficha.objetivo === "ganhar" ? pesoAtual >= pesoMeta : pesoAtual <= pesoMeta) : false;
+  const metaPesoLabel = objetivoGanho ? "meta de ganho" : "meta de peso";
+  const progressoPeso = objetivoGanho
+    ? { valor: `${pesoGanho.toFixed(1)} kg`, rotulo: pesoMeta && !metaBatida ? `faltam ${pesoRestante.toFixed(1)} kg` : "peso ganho", pct: pesoMeta ? Math.min((pesoGanho / Math.max(1, Math.abs(pesoMeta - pesoInicial))) * 100, 100) : 0 }
+    : { valor: `${pesoPerdido.toFixed(1)} kg`, rotulo: "peso perdido", pct: Math.min((pesoPerdido / 10) * 100, 100) };
   const caminhoMeta = pesoMeta && pesoInicial !== pesoMeta ? Math.abs((pesoAtual - pesoInicial) / (pesoMeta - pesoInicial)) * 100 : 0;
-  const semanaCompleta = historico.length >= frequencia;
+  const semanaCompleta = concluidosSemana >= frequencia;
   const streak = semanaCompleta ? Number(localStorage.getItem("acafStreak") || 0) + 1 : Number(localStorage.getItem("acafStreak") || 0);
   if (semanaCompleta && localStorage.getItem("acafSemanaPremiada") !== new Date().toISOString().slice(0, 10)) {
     localStorage.setItem("acafStreak", String(streak));
@@ -864,21 +2022,24 @@ function renderMetas() {
   const streakAtual = Number(localStorage.getItem("acafStreak") || 0);
 
   $("metasGrid").innerHTML = [
-    { valor: `${historico.length}/${frequencia}`, rotulo: "treinos semanais", pct: (historico.length / frequencia) * 100 },
-    { valor: formatMetric(kcal, "", 0, "0"), rotulo: "kcal realizadas", pct: Math.min((kcal / 1800) * 100, 100) },
+    { valor: `${concluidosSemana}/${frequencia}`, rotulo: "treinos semanais", pct: (concluidosSemana / frequencia) * 100 },
+    { valor: formatMetric(kcal, "", 0, "0"), rotulo: `kcal de ${formatMetric(metaCalorias, "", 0, "0")}`, pct: Math.min((kcal / metaCalorias) * 100, 100) },
     { valor: `${volume}`, rotulo: "séries estimadas", pct: Math.min((volume / 60) * 100, 100) },
     { valor: ficha ? formatMetric(ficha.agua, " L", 1) : "--", rotulo: "água diária", pct: ficha ? 100 : 0 },
-    { valor: pesoMeta ? `${pesoAtual.toFixed(1)}/${pesoMeta.toFixed(1)}` : "--", rotulo: metaBatida ? "meta batida" : "meta de peso", pct: metaBatida ? 100 : Math.min(caminhoMeta, 100) },
-    { valor: `${pesoPerdido.toFixed(1)} kg`, rotulo: "peso perdido", pct: Math.min((pesoPerdido / 10) * 100, 100) },
+    { valor: pesoMeta ? `${pesoAtual.toFixed(1)}/${pesoMeta.toFixed(1)}` : "--", rotulo: metaBatida ? "meta batida" : metaPesoLabel, pct: metaBatida ? 100 : Math.min(caminhoMeta, 100) },
+    progressoPeso,
     { valor: `${streakAtual}x`, rotulo: "ofensiva semanal", pct: Math.min(streakAtual * 20, 100) },
-    { valor: semanaCompleta ? "ouro" : "em jogo", rotulo: "conquista da semana", pct: semanaCompleta ? 100 : (historico.length / frequencia) * 100 }
+    { valor: semanaCompleta ? "ouro" : "em jogo", rotulo: "conquista da semana", pct: semanaCompleta ? 100 : (concluidosSemana / frequencia) * 100 }
   ].map((meta) => `
     <article class="goal">
       <strong>${meta.valor}</strong>
       <span>${meta.rotulo}</span>
-      <div><i style="width:${Math.min(meta.pct, 100)}%"></i></div>
+      <div><i data-width="${Math.min(meta.pct, 100)}"></i></div>
     </article>
   `).join("");
+  $("metasGrid").querySelectorAll("i").forEach((bar) => {
+    bar.style.width = `${bar.dataset.width}%`;
+  });
 }
 
 function formatarData(data) {
@@ -1103,9 +2264,40 @@ function comprimirImagem(file) {
   });
 }
 
-function startTimer() {
+function prepararAvisoDescanso() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (AudioCtx && !timerAudioContext) timerAudioContext = new AudioCtx();
+    timerAudioContext?.resume?.();
+  } catch {
+    timerAudioContext = null;
+  }
+}
+
+function avisarFimDescanso() {
+  if (navigator.vibrate) navigator.vibrate([180, 100, 180]);
+  try {
+    if (!timerAudioContext) return;
+    const oscillator = timerAudioContext.createOscillator();
+    const gain = timerAudioContext.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(740, timerAudioContext.currentTime);
+    gain.gain.setValueAtTime(0.0001, timerAudioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.16, timerAudioContext.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, timerAudioContext.currentTime + 0.35);
+    oscillator.connect(gain);
+    gain.connect(timerAudioContext.destination);
+    oscillator.start();
+    oscillator.stop(timerAudioContext.currentTime + 0.36);
+  } catch {
+    timerAudioContext = null;
+  }
+}
+
+function startTimer(seconds = 60) {
   clearInterval(timerInterval);
-  timerSeconds = 60;
+  prepararAvisoDescanso();
+  timerSeconds = Math.max(1, safeNumber(seconds, 60));
   $("restTimer").classList.add("show");
   updateTimer();
   timerInterval = setInterval(() => {
@@ -1114,6 +2306,7 @@ function startTimer() {
     if (timerSeconds <= 0) {
       clearInterval(timerInterval);
       $("restTimer").classList.remove("show");
+      avisarFimDescanso();
       toast("Descanso finalizado. Pode voltar para a próxima série.");
     }
   }, 1000);
@@ -1154,6 +2347,11 @@ function renderFocusExercise() {
 }
 
 function openFocusMode(index = 0) {
+  if (!getFicha()) {
+    showScreen("perfil");
+    toast("Preencha seu perfil para iniciar um treino personalizado.");
+    return;
+  }
   renderTreinos();
   if (!exerciciosAtuais.length) {
     toast("Gere sua ficha para abrir o modo treino.");
@@ -1182,13 +2380,15 @@ function moveFocus(delta) {
 
 function startFocusRest() {
   clearInterval(focusTimerInterval);
-  focusTimerSeconds = 60;
+  prepararAvisoDescanso();
+  focusTimerSeconds = descansoDoExercicio(exerciciosAtuais[focusIndex]);
   updateFocusTimer();
   focusTimerInterval = setInterval(() => {
     focusTimerSeconds -= 1;
     updateFocusTimer();
     if (focusTimerSeconds <= 0) {
       clearInterval(focusTimerInterval);
+      avisarFimDescanso();
       toast("Descanso finalizado. Próximo exercício liberado.");
       moveFocus(1);
     }
@@ -1200,14 +2400,20 @@ function concluirFocusAtual() {
   if (!exercicio) return;
   const historico = getHistorico();
   if (!historico.includes(exercicio.id)) {
+    const totalSeries = quantidadeSeries(exercicio);
+    registrarCargaExercicio(exercicio.id, totalSeries);
     historico.push(exercicio.id);
     setHistorico(historico);
+    const progress = getSeriesProgress();
+    progress[exercicio.id] = totalSeries;
+    setSeriesProgress(progress);
+    registrarAtividade(exercicio.id);
   }
   const ficha = getFicha();
   if (ficha) atualizarInterface(ficha);
   renderFocusExercise();
-  toast("Exercício concluído no modo treino.");
-  moveFocus(1);
+  startFocusRest();
+  toast(`Exercício concluído. Descanso de ${descansoDoExercicio(exercicio)}s iniciado.`);
 }
 
 function carregarFicha() {
@@ -1215,6 +2421,8 @@ function carregarFicha() {
   renderGrafico();
   renderMetas();
   renderRegistrosVisuais();
+  renderConquistas();
+  renderTrainingAnalytics();
   $("dataRegistro").valueAsDate = new Date();
 
   const saved = getFicha();
@@ -1228,19 +2436,31 @@ function carregarFicha() {
   $("nome").value = saved.nome || "";
   $("professorNome").value = saved.professorNome || "";
   $("idade").value = saved.idade || "";
+  $("sexo").value = saved.sexo || "masculino";
   $("peso").value = saved.peso || "";
   $("altura").value = saved.altura || "";
   $("pesoMeta").value = saved.pesoMeta || "";
   $("objetivo").value = saved.objetivo || "emagrecer";
-  $("nivel").value = saved.nivel || "iniciante";
+  $("nivel").value = saved.nivel || "";
+  $("experiencia").value = saved.experiencia || "0";
+  $("historicoTreino").value = saved.historicoTreino || "0";
   $("frequencia").value = saved.frequencia || "5";
   $("condicao").value = saved.condicao || "sem_restricao";
+  if (saved.fotoPerfil) updateFileLabel("fotoPerfilTexto", "Foto do aluno salva");
+  if (saved.fotoProfessor) updateFileLabel("fotoProfessorTexto", "Foto do professor salva");
   treinosAtuais = ajustarTreinos(saved.objetivo, saved.nivel, saved.frequencia, saved.condicao);
   atualizarInterface(saved);
 }
 
 document.querySelectorAll("[data-section]").forEach((btn) => {
   btn.addEventListener("click", () => showScreen(btn.dataset.section));
+});
+
+["nome", "idade", "peso", "altura", "nivel"].forEach((id) => {
+  $(id)?.addEventListener("input", () => {
+    $(id).classList.remove("field-invalid");
+    $(id).closest("label")?.classList.remove("label-invalid");
+  });
 });
 
 document.querySelectorAll("#filtrosTreino button").forEach((btn) => {
@@ -1252,7 +2472,7 @@ document.querySelectorAll("#filtrosTreino button").forEach((btn) => {
   });
 });
 
-$("btnGerar").addEventListener("click", gerarFicha);
+$("btnGerar").addEventListener("click", () => withButtonLoading($("btnGerar"), "Gerando ficha", gerarFicha));
 $("fotoPerfil").addEventListener("change", async (event) => {
   const file = event.target.files?.[0];
   if (!file) return;
@@ -1263,6 +2483,7 @@ $("fotoPerfil").addEventListener("change", async (event) => {
   fotoPerfilSelecionada = await comprimirImagem(file);
   $("alunoAvatar").innerHTML = avatarMarkup(fotoPerfilSelecionada, $("nome").value || "Aluno");
   document.querySelector(".brand-mark").innerHTML = avatarMarkup(fotoPerfilSelecionada, $("nome").value || "Aluno");
+  updateFileLabel("fotoPerfilTexto", file.name);
   toast("Foto do aluno carregada.");
 });
 $("fotoProfessor").addEventListener("change", async (event) => {
@@ -1274,6 +2495,7 @@ $("fotoProfessor").addEventListener("change", async (event) => {
   }
   fotoProfessorSelecionada = await comprimirImagem(file);
   $("professorAvatar").innerHTML = avatarMarkup(fotoProfessorSelecionada, $("professorNome").value || "Professor");
+  updateFileLabel("fotoProfessorTexto", file.name);
   toast("Foto do professor carregada.");
 });
 $("fotoRegistro").addEventListener("change", async (event) => {
@@ -1294,7 +2516,7 @@ $("fotoRegistro").addEventListener("change", async (event) => {
     toast("Não foi possível carregar essa foto.");
   }
 });
-$("btnSalvarFoto").addEventListener("click", salvarRegistroVisual);
+$("btnSalvarFoto").addEventListener("click", () => withButtonLoading($("btnSalvarFoto"), "Salvando evolução", salvarRegistroVisual));
 $("btnIrTreinos").addEventListener("click", () => {
   showScreen("treinos");
   openFocusMode(0);
@@ -1312,10 +2534,31 @@ $("focusDone").addEventListener("click", concluirFocusAtual);
 $("focusMode").addEventListener("click", (event) => {
   if (event.target.id === "focusMode") closeFocusMode();
 });
-$("btnLimpar").addEventListener("click", () => {
+function openClearConfirm() {
+  $("confirmClear").classList.add("show");
+  $("confirmClear").setAttribute("aria-hidden", "false");
+}
+
+function closeClearConfirm() {
+  $("confirmClear").classList.remove("show");
+  $("confirmClear").setAttribute("aria-hidden", "true");
+}
+
+$("btnLimpar").addEventListener("click", openClearConfirm);
+$("btnCancelarLimpeza").addEventListener("click", closeClearConfirm);
+$("confirmClear").addEventListener("click", (event) => {
+  if (event.target.id === "confirmClear") closeClearConfirm();
+});
+$("btnConfirmarLimpeza").addEventListener("click", () => {
   localStorage.removeItem("acafFicha");
   localStorage.removeItem("acafHistorico");
   localStorage.removeItem("acafRegistrosVisuais");
+  localStorage.removeItem("acafCargaHistorico");
+  localStorage.removeItem("acafRascunhosExercicios");
+  localStorage.removeItem("acafSeriesProgress");
+  localStorage.removeItem("acafActivityLog");
+  localStorage.removeItem("acafStreak");
+  localStorage.removeItem("acafSemanaPremiada");
   location.reload();
 });
 $("btnSemana").addEventListener("click", () => {
@@ -1324,12 +2567,15 @@ $("btnSemana").addEventListener("click", () => {
 });
 $("btnResetSemana").addEventListener("click", () => {
   setHistorico([]);
+  setSeriesProgress({});
   const ficha = getFicha();
   if (ficha) atualizarInterface(ficha);
   toast("Semana reiniciada.");
 });
 $("fecharModal").addEventListener("click", fecharVideo);
 $("modalFecharBaixo").addEventListener("click", fecharVideo);
+$("modalPip").addEventListener("click", abrirVideoFlutuante);
+$("btnExportarRelatorio").addEventListener("click", exportarRelatorio);
 $("modalPersonalizar").addEventListener("click", () => {
   toast("Exercício pronto para personalizar na ficha.");
 });
@@ -1343,7 +2589,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
   $("btnInstall").hidden = false;
 });
 
-$("btnInstall").addEventListener("click", async () => {
+async function instalarApp() {
   if (!deferredInstallPrompt) {
     toast("No celular, use o menu do navegador e toque em instalar app.");
     return;
@@ -1352,9 +2598,25 @@ $("btnInstall").addEventListener("click", async () => {
   await deferredInstallPrompt.userChoice;
   deferredInstallPrompt = null;
   $("btnInstall").hidden = true;
-});
+}
 
-if ("serviceWorker" in navigator) {
+$("btnInstall").addEventListener("click", instalarApp);
+$("btnInstallInline").addEventListener("click", instalarApp);
+
+function limparCacheLocalDev() {
+  const localDev = ["localhost", "127.0.0.1"].includes(location.hostname);
+  if (!localDev) return;
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations?.().then((regs) => regs.forEach((reg) => reg.unregister())).catch(() => {});
+  }
+  if ("caches" in window) {
+    caches.keys().then((keys) => keys.forEach((key) => caches.delete(key))).catch(() => {});
+  }
+}
+
+limparCacheLocalDev();
+
+if ("serviceWorker" in navigator && !["localhost", "127.0.0.1"].includes(location.hostname)) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
