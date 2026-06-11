@@ -1,9 +1,9 @@
-const CACHE_NAME = "acaf-centro-performance-v40-premium-performance";
+const CACHE_NAME = "acaf-centro-performance-v42-daily-progress";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./style.css?v=acaf-premium-20260609-9",
-  "./script.js?v=acaf-premium-20260609-9",
+  "./style.css?v=acaf-premium-20260611-11",
+  "./script.js?v=acaf-premium-20260611-11",
   "./manifest.webmanifest",
   "./assets/img/forca.jpg",
   "./assets/img/cardio.jpg",
@@ -25,7 +25,19 @@ const APP_SHELL = [
   "./assets/videos/avanco-halteres.mp4",
   "./assets/videos/prancha-abdominal.mp4",
   "./assets/videos/desenvolvimento-militar.mp4",
-  "./assets/videos/face-pull-corda.mp4"
+  "./assets/videos/face-pull-corda.mp4",
+  "./assets/videos/supino-halteres.mp4",
+  "./assets/videos/supino-inclinado-barra.mp4",
+  "./assets/videos/mergulho-paralelas.mp4",
+  "./assets/videos/triceps-cabo.mp4",
+  "./assets/videos/triceps-frances-halter.mp4",
+  "./assets/videos/triceps-coice.mp4",
+  "./assets/videos/remada-unilateral.mp4",
+  "./assets/videos/rosca-alternada.mp4",
+  "./assets/videos/rosca-martelo.mp4",
+  "./assets/videos/rosca-cabo.mp4",
+  "./assets/videos/rosca-scott.mp4",
+  "./assets/videos/remada-sentada-fechada.mp4"
 ];
 
 self.addEventListener("install", (event) => {

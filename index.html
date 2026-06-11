@@ -8,7 +8,7 @@
   <title>ACAF - Centro de Performance</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./assets/img/ombro-profissional.png" />
-  <link rel="stylesheet" href="style.css?v=acaf-premium-20260609-9" />
+  <link rel="stylesheet" href="style.css?v=acaf-premium-20260611-11" />
 </head>
 <body>
   <aside class="sidebar">
@@ -144,12 +144,28 @@
         </div>
       </div>
 
-      <div class="category-grid">
-        <article class="category category-forca"><span>Força</span><strong>Progressão de cargas</strong></article>
-        <article class="category category-cardio"><span>Cardio</span><strong>Condicionamento</strong></article>
-        <article class="category category-hiit"><span>HIIT</span><strong>Alta intensidade</strong></article>
-        <article class="category category-mobilidade"><span>Mobilidade</span><strong>Postura e recuperação</strong></article>
+      <div class="program-overview" aria-label="Resumo do programa semanal">
+        <article><span>Programa</span><strong>5 dias planejados</strong><small>Divisão equilibrada por grupo muscular</small></article>
+        <article><span>Volume</span><strong>5 a 6 exercícios</strong><small>Por sessão, adaptados ao nível do aluno</small></article>
+        <article><span>Execução</span><strong>Vídeos específicos</strong><small>Cada nome corresponde ao movimento exibido</small></article>
+        <article><span>Progresso</span><strong>Cargas e séries</strong><small>Histórico salvo para evolução contínua</small></article>
       </div>
+
+      <section class="daily-progress-panel" id="dailyProgressPanel" aria-live="polite" hidden>
+        <div class="daily-progress-copy">
+          <span class="eyebrow">Treino atual</span>
+          <h3 id="dailyProgressTitle">Selecione o treino de hoje</h3>
+          <p id="dailyProgressText">0/0 exercícios concluídos</p>
+        </div>
+        <div class="day-switcher" id="daySwitcher" aria-label="Selecionar treino atual"></div>
+        <div class="daily-progress-value">
+          <strong id="dailyProgressPercent">0%</strong>
+          <span>concluído</span>
+        </div>
+        <div class="daily-progress-track" role="progressbar" aria-label="Conclusão do treino atual" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="dailyProgressFill"></span>
+        </div>
+      </section>
 
       <div class="section-head sub-head">
         <div>
@@ -350,6 +366,7 @@
               <option value="emagrecer">Emagrecer</option>
               <option value="definir">Definir corpo</option>
               <option value="ganhar">Ganhar massa</option>
+              <option value="forca">Força funcional</option>
               <option value="resistencia">Resistência</option>
             </select>
           </label>
@@ -463,6 +480,17 @@
     </div>
   </div>
 
+  <div class="celebration-modal" id="celebrationModal" aria-hidden="true">
+    <div class="celebration-confetti" id="celebrationConfetti" aria-hidden="true"></div>
+    <div class="celebration-box" role="dialog" aria-modal="true" aria-labelledby="celebrationTitle">
+      <span class="celebration-check" aria-hidden="true">✓</span>
+      <span class="eyebrow">Sessão finalizada</span>
+      <h3 id="celebrationTitle">Treino concluído com sucesso!</h3>
+      <p id="celebrationText">Excelente trabalho. Seu progresso foi salvo neste dispositivo.</p>
+      <button class="primary" id="btnCloseCelebration" type="button">Continuar</button>
+    </div>
+  </div>
+
   <div class="rest-timer" id="restTimer" aria-live="polite">
     <span>Descanso</span>
     <strong id="timerValue">01:00</strong>
@@ -507,7 +535,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=acaf-premium-20260609-9"></script>
+  <script src="script.js?v=acaf-premium-20260611-11"></script>
 </body>
 </html>
 

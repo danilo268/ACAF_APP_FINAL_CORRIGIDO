@@ -105,6 +105,24 @@ const gruposExercicios = [
         desc: "Escápulas firmes, pés no chão e barra descendo controlada até a linha do peito."
       },
       {
+        id: "supino-halteres",
+        titulo: "Supino com halteres",
+        video: "./assets/videos/supino-halteres.mp4",
+        inicio: 0,
+        grupo: "Peito",
+        series: "3 séries x 10 a 12 repetições | descanso 75s",
+        desc: "Desça os halteres com cotovelos alinhados, mantenha as escápulas apoiadas e suba sem bater os pesos."
+      },
+      {
+        id: "supino-inclinado-barra",
+        titulo: "Supino inclinado com barra",
+        video: "./assets/videos/supino-inclinado-barra.mp4",
+        inicio: 0,
+        grupo: "Peito",
+        series: "3 séries x 8 a 12 repetições | descanso 75s",
+        desc: "Ajuste o banco inclinado, mantenha os pés firmes e conduza a barra até a parte superior do peito."
+      },
+      {
         id: "crossover-cabo",
         titulo: "Crossover no cabo",
         video: "./assets/videos/peito.mp4",
@@ -161,30 +179,40 @@ const gruposExercicios = [
       },
       {
         id: "triceps-corda",
-        titulo: "Tríceps na corda",
-        video: "./assets/videos/peito.mp4",
+        titulo: "Tríceps no cabo",
+        video: "./assets/videos/triceps-cabo.mp4",
         inicio: 0,
         grupo: "Tríceps",
         series: "3 séries x 12 a 15 repetições | descanso 60s",
-        desc: "Abra a corda no final do movimento e mantenha os cotovelos próximos ao corpo."
+        desc: "Mantenha os cotovelos junto ao corpo, estenda completamente os braços e controle a volta do cabo."
       },
       {
         id: "triceps-frances-corda",
-        titulo: "Tríceps francês na corda",
-        video: "./assets/videos/peito.mp4",
+        titulo: "Tríceps francês com halter",
+        video: "./assets/videos/triceps-frances-halter.mp4",
         inicio: 0,
         grupo: "Tríceps",
         series: "3 séries x 10 a 12 repetições | descanso 60s",
-        desc: "Cotovelos apontados para frente, estenda os braços acima da cabeça e controle a descida."
+        desc: "Segure o halter acima da cabeça, mantenha os cotovelos apontados para frente e controle toda a descida."
       },
       {
         id: "triceps-coice",
         titulo: "Tríceps coice",
-        video: "./assets/videos/peito.mp4",
+        video: "./assets/videos/triceps-coice.mp4",
         inicio: 0,
         grupo: "Tríceps",
         series: "3 séries x 12 por braço | descanso 45s",
         desc: "Tronco levemente inclinado, cotovelo fixo e extensão completa sem balançar o braço."
+      },
+      {
+        id: "mergulho-paralelas",
+        titulo: "Mergulho nas paralelas",
+        video: "./assets/videos/mergulho-paralelas.mp4",
+        inicio: 0,
+        grupo: "Tríceps",
+        evitar: ["ombro"],
+        series: "3 séries x 8 a 12 repetições | descanso 75s",
+        desc: "Desça com os ombros estáveis, cotovelos apontados para trás e use apoio assistido quando necessário."
       },
       {
         id: "triceps-maquina",
@@ -275,17 +303,17 @@ const gruposExercicios = [
       },
       {
         id: "remada-maquina-neutra",
-        titulo: "Remada máquina pegada neutra",
-        video: "./assets/videos/costas.mp4",
+        titulo: "Remada sentada pegada fechada",
+        video: "./assets/videos/remada-sentada-fechada.mp4",
         inicio: 0,
         grupo: "Costas",
         series: "3 séries x 10 a 12 repetições | descanso 75s",
-        desc: "Apoie o peito, puxe com cotovelos e segure um segundo na contração."
+        desc: "Mantenha o tronco firme, puxe a pegada em direção ao abdômen e segure um segundo na contração."
       },
       {
         id: "rosca-alternada",
         titulo: "Rosca alternada",
-        video: "./assets/videos/costas.mp4",
+        video: "./assets/videos/rosca-alternada.mp4",
         inicio: 0,
         grupo: "Bíceps",
         series: "3 séries x 10 por braço | descanso 60s",
@@ -294,17 +322,16 @@ const gruposExercicios = [
       {
         id: "rosca-scott-maquina",
         titulo: "Rosca Scott na máquina",
-        video: "./assets/videos/costas.mp4",
+        video: "./assets/videos/rosca-scott.mp4",
         inicio: 0,
         grupo: "Bíceps",
-        nivelMin: "intermediario",
         series: "3 séries x 10 a 12 repetições | descanso 60s",
         desc: "Apoie bem o braço no banco e controle a descida para não perder tensão."
       },
       {
         id: "rosca-cabo",
         titulo: "Rosca no cabo",
-        video: "./assets/videos/costas.mp4",
+        video: "./assets/videos/rosca-cabo.mp4",
         inicio: 0,
         grupo: "Bíceps",
         series: "3 séries x 12 repetições | descanso 60s",
@@ -340,24 +367,20 @@ const gruposExercicios = [
       },
       {
         id: "remada-unilateral",
-        titulo: "Remada unilateral",
-        video: "./assets/videos/costas.mp4",
+        titulo: "Remada unilateral no cabo",
+        video: "./assets/videos/remada-unilateral.mp4",
         inicio: 0,
         grupo: "Costas",
-        nivelMin: "intermediario",
-        experienciaMin: 6,
         series: "3 séries x 10 a 12 por lado | descanso 60s",
-        desc: "Trabalhe um lado de cada vez, mantendo tronco firme e cotovelo puxando para trás."
+        desc: "Trabalhe um lado de cada vez, mantenha o tronco firme e conduza o cotovelo para trás sem girar o corpo."
       },
       {
         id: "rosca-martelo",
         titulo: "Rosca martelo",
-        video: "./assets/videos/costas.mp4",
+        video: "./assets/videos/rosca-martelo.mp4",
         inicio: 0,
         grupo: "Bíceps",
-        nivelMin: "avancado",
-        experienciaMin: 18,
-        series: "4 séries x 10 repetições | descanso 60s",
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
         desc: "Variação para bíceps e braquial, com punhos neutros e subida sem impulsionar o tronco."
       }
     ]
@@ -633,7 +656,7 @@ const planoMuscularSemanal = [
   {
     diaLabel: "Segunda-feira",
     titulo: "Pernas e glúteos",
-    desc: "Dia completo de inferiores, com máquinas, posterior, glúteo, panturrilha e cardio final.",
+    desc: "Dia completo de inferiores, combinando quadríceps, posterior, glúteos e panturrilhas.",
     tags: ["Pernas", "75 min", "Força"],
     filtro: "forca",
     ids: [
@@ -646,46 +669,59 @@ const planoMuscularSemanal = [
   },
   {
     diaLabel: "Terça-feira",
-    titulo: "Peito",
-    desc: "Foco em peito com supinos, abertura, cabo e finalização para manter gasto calórico.",
-    tags: ["Peito", "65 min", "Força"],
+    titulo: "Peito e tríceps",
+    desc: "Supinos em diferentes ângulos, abertura no cabo e finalização técnica de tríceps.",
+    tags: ["Peito", "70 min", "Força"],
     filtro: "forca",
     ids: [
       "supino-reto",
-      "crossover-cabo"
+      "supino-halteres",
+      "supino-inclinado-barra",
+      "crossover-cabo",
+      "mergulho-paralelas"
     ]
   },
   {
     diaLabel: "Quarta-feira",
-    titulo: "Tríceps e ombros",
-    desc: "Tríceps na polia e movimentos guiados de ombro com execução técnica.",
-    tags: ["Superiores", "55 min", "Força"],
+    titulo: "Ombros e tríceps",
+    desc: "Pressão vertical, estabilidade escapular e três variações seguras para tríceps.",
+    tags: ["Superiores", "65 min", "Força"],
     filtro: "forca",
     ids: [
-      "triceps-polia-barra",
       "desenvolvimento-militar",
-      "face-pull-corda"
+      "face-pull-corda",
+      "triceps-polia-barra",
+      "triceps-corda",
+      "triceps-frances-corda",
+      "triceps-coice"
     ]
   },
   {
     diaLabel: "Quinta-feira",
-    titulo: "Costas",
-    desc: "Puxadas e remadas para dorsal, postura e fortalecimento das escápulas.",
-    tags: ["Costas", "70 min", "Força"],
+    titulo: "Costas e bíceps",
+    desc: "Puxadas e remadas para dorsal e postura, seguidas de estímulo completo de bíceps.",
+    tags: ["Costas", "75 min", "Força"],
     filtro: "forca",
     ids: [
       "puxada-frontal",
-      "remada-baixa"
+      "remada-baixa",
+      "remada-unilateral",
+      "face-pull-corda",
+      "remada-maquina-neutra"
     ]
   },
   {
     diaLabel: "Sexta-feira",
     titulo: "Bíceps e core",
-    desc: "Rosca direta e estabilidade abdominal para fechar a semana com execução segura.",
-    tags: ["Bíceps", "45 min", "Força"],
+    desc: "Variações de pegada para braços e estabilidade abdominal para fechar a semana.",
+    tags: ["Bíceps", "55 min", "Força"],
     filtro: "forca",
     ids: [
       "rosca-direta",
+      "rosca-alternada",
+      "rosca-martelo",
+      "rosca-cabo",
+      "rosca-scott-maquina",
       "prancha-abdominal"
     ]
   }
@@ -706,7 +742,19 @@ const videoRealPorExercicio = {
   "prancha-cardio": "./assets/videos/prancha-abdominal.mp4",
   "prancha-abdominal": "./assets/videos/prancha-abdominal.mp4",
   "desenvolvimento-militar": "./assets/videos/desenvolvimento-militar.mp4",
-  "face-pull-corda": "./assets/videos/face-pull-corda.mp4"
+  "face-pull-corda": "./assets/videos/face-pull-corda.mp4",
+  "supino-halteres": "./assets/videos/supino-halteres.mp4",
+  "supino-inclinado-barra": "./assets/videos/supino-inclinado-barra.mp4",
+  "mergulho-paralelas": "./assets/videos/mergulho-paralelas.mp4",
+  "triceps-corda": "./assets/videos/triceps-cabo.mp4",
+  "triceps-frances-corda": "./assets/videos/triceps-frances-halter.mp4",
+  "triceps-coice": "./assets/videos/triceps-coice.mp4",
+  "remada-unilateral": "./assets/videos/remada-unilateral.mp4",
+  "rosca-alternada": "./assets/videos/rosca-alternada.mp4",
+  "rosca-martelo": "./assets/videos/rosca-martelo.mp4",
+  "rosca-cabo": "./assets/videos/rosca-cabo.mp4",
+  "rosca-scott-maquina": "./assets/videos/rosca-scott.mp4",
+  "remada-maquina-neutra": "./assets/videos/remada-sentada-fechada.mp4"
 };
 
 gruposExercicios.forEach((grupo) => {
@@ -718,6 +766,7 @@ gruposExercicios.forEach((grupo) => {
 let exerciciosAtuais = gruposExercicios.flatMap((grupo) => grupo.exercicios);
 
 const $ = (id) => document.getElementById(id);
+const WORKOUT_STATE_KEY = "acafWorkoutState";
 
 function safeNumber(value, fallback = 0) {
   const number = Number(value);
@@ -746,12 +795,49 @@ function getFicha() {
   }
 }
 
-function getHistorico() {
+function diaPadraoDoTreino() {
+  const diaSemana = new Date().getDay();
+  return diaSemana >= 1 && diaSemana <= 5 ? diaSemana - 1 : 0;
+}
+
+function getWorkoutState() {
+  let legacyCompleted = [];
   try {
-    return JSON.parse(localStorage.getItem("acafHistorico")) || [];
+    legacyCompleted = JSON.parse(localStorage.getItem("acafHistorico")) || [];
   } catch {
-    return [];
+    legacyCompleted = [];
   }
+  try {
+    const saved = JSON.parse(localStorage.getItem(WORKOUT_STATE_KEY)) || {};
+    return {
+      completed: Array.isArray(saved.completed) ? saved.completed : legacyCompleted,
+      currentDay: Math.max(0, Math.min(4, safeNumber(saved.currentDay, diaPadraoDoTreino()))),
+      workouts: Array.isArray(saved.workouts) ? saved.workouts : [],
+      celebrations: Array.isArray(saved.celebrations) ? saved.celebrations : [],
+      updatedAt: saved.updatedAt || null
+    };
+  } catch {
+    return {
+      completed: legacyCompleted,
+      currentDay: diaPadraoDoTreino(),
+      workouts: [],
+      celebrations: [],
+      updatedAt: null
+    };
+  }
+}
+
+function saveWorkoutState(state) {
+  localStorage.setItem(WORKOUT_STATE_KEY, JSON.stringify({
+    ...state,
+    completed: [...new Set(state.completed || [])],
+    workouts: (state.workouts || []).slice(-180),
+    updatedAt: new Date().toISOString()
+  }));
+}
+
+function getHistorico() {
+  return getWorkoutState().completed;
 }
 
 function getCargaHistorico() {
@@ -791,7 +877,10 @@ function setRegistrosVisuais(registros) {
 }
 
 function setHistorico(historico) {
-  localStorage.setItem("acafHistorico", JSON.stringify(historico));
+  const completed = [...new Set(historico)];
+  localStorage.setItem("acafHistorico", JSON.stringify(completed));
+  const state = getWorkoutState();
+  saveWorkoutState({ ...state, completed });
 }
 
 function getSeriesProgress() {
@@ -839,17 +928,31 @@ function dataLocalKey(date = new Date()) {
   return `${ano}-${mes}-${dia}`;
 }
 
-function diasConcluidosDaSemana(historico = getHistorico()) {
+function idsPlanejadosDoGrupo(grupo, ficha = getFicha()) {
+  const mapa = gruposExercicios.flatMap((item) => item.exercicios).reduce((acc, exercicio) => {
+    acc[exercicio.id] = exercicio;
+    return acc;
+  }, {});
+  return grupo.ids
+    .map((id) => mapa[id])
+    .filter(Boolean)
+    .filter((exercicio) => Boolean(videoRealPorExercicio[exercicio.id]))
+    .filter((exercicio) => !ficha || !exercicioBloqueado(exercicio, ficha))
+    .slice(0, volumePorPerfil(ficha))
+    .map((exercicio) => exercicio.id);
+}
+
+function diasConcluidosDaSemana(historico = getHistorico(), ficha = getFicha()) {
   const concluidos = new Set(historico);
   return planoMuscularSemanal.map((grupo, index) => ({
     index,
     grupo,
-    concluido: grupo.ids.some((id) => concluidos.has(id))
+    concluido: idsPlanejadosDoGrupo(grupo, ficha).every((id) => concluidos.has(id))
   }));
 }
 
 function progressoSemanal(ficha = getFicha(), historico = getHistorico()) {
-  const dias = diasConcluidosDaSemana(historico);
+  const dias = diasConcluidosDaSemana(historico, ficha);
   const planejados = treinosAtuais
     .map((treino, index) => treino.ativo !== false ? index : null)
     .filter((index) => index !== null);
@@ -979,6 +1082,7 @@ function toggleSerieExercicio(id, numeroSerie, totalExibido, descansoExibido) {
   startTimer(Math.max(15, safeNumber(descansoExibido, descansoDoExercicio(exercicio))));
   const ficha = getFicha();
   if (ficha) atualizarInterface(ficha);
+  if (progress[id] >= total) finalizarAcaoDeExercicio(id);
 }
 
 function carregarUltimaCarga(id, button) {
@@ -1061,6 +1165,11 @@ function textoObjetivo(objetivo, peso, frequencia, caloriasCalculadas = 0) {
       texto: `Para ganhar massa, use superavit calorico leve: aproximadamente ${calorias + 300} kcal por dia e aumente cargas aos poucos.`,
       rec: ["Progressao de carga", "Refeicoes completas", "Descanso muscular"]
     },
+    forca: {
+      plano: "Força funcional",
+      texto: `Para desenvolver força útil no trabalho e no dia a dia, priorize exercícios compostos, progressão gradual e recuperação adequada, mantendo cerca de ${calorias} kcal por dia.`,
+      rec: ["Movimentos compostos", "Descanso de 2 a 3 minutos", "Técnica antes da carga"]
+    },
     resistencia: {
       plano: "Resistência física",
       texto: `Para resistência, combine musculação moderada com treinos cardiovasculares e mantenha cerca de ${calorias} kcal por dia.`,
@@ -1076,6 +1185,7 @@ function objetivoLabel(value) {
     emagrecer: "emagrecer",
     definir: "definir corpo",
     ganhar: "ganhar massa",
+    forca: "força funcional",
     resistencia: "resistência"
   }[value] || value;
 }
@@ -1195,6 +1305,26 @@ function adaptarExercicio(exercicio, ficha) {
   if (ficha.objetivo === "ganhar") {
     item.series = ficha.nivel === "iniciante" && historicoRank(ficha) < 12 ? "3 séries x 8 a 12 repetições | descanso 75s" : "4 séries x 6 a 10 repetições | descanso 90s";
     item.desc = `${item.desc} Objetivo de ganho: priorize carga progressiva, descanso completo e execução forte.`;
+  }
+  if (ficha.objetivo === "forca") {
+    const compostos = new Set([
+      "leg-press-45",
+      "levantamento-romeno",
+      "avanco-halteres",
+      "supino-reto",
+      "supino-halteres",
+      "supino-inclinado-barra",
+      "mergulho-paralelas",
+      "desenvolvimento-militar",
+      "puxada-frontal",
+      "remada-baixa",
+      "remada-unilateral",
+      "remada-maquina-neutra"
+    ]);
+    item.series = compostos.has(item.id)
+      ? "4 a 5 séries x 4 a 6 repetições | descanso 120 a 180s"
+      : "3 séries x 8 a 10 repetições | descanso 75 a 90s";
+    item.desc = `${item.desc} Objetivo de força funcional: use progressão gradual, repetição limpa e pare antes de perder a técnica.`;
   }
   if (ficha.objetivo === "definir") {
     item.series = ficha.nivel === "iniciante" && historicoRank(ficha) < 12 ? "3 séries x 10 a 12 repetições | descanso 60s" : "3 a 4 séries x 10 a 15 repetições | descanso 45 a 60s";
@@ -1453,6 +1583,7 @@ function renderTreinos() {
   const historico = getHistorico();
   if (!ficha) {
     exerciciosAtuais = [];
+    $("dailyProgressPanel").hidden = true;
     $("listaTreinos").innerHTML = `
       <section class="training-empty">
         <span class="empty-icon" aria-hidden="true">+</span>
@@ -1489,8 +1620,10 @@ function renderTreinos() {
 
       return {
         ...grupo,
+        groupIndex,
         planejado: treinosAtuais[groupIndex]?.ativo !== false,
-        exercicios
+        exercicios,
+        totalSeries: exercicios.reduce((total, exercicio) => total + quantidadeSeries(exercicio), 0)
       };
     })
     .filter((grupo) => grupo.exercicios.length);
@@ -1498,13 +1631,22 @@ function renderTreinos() {
   exerciciosAtuais = grupos.flatMap((grupo) => grupo.exercicios);
 
   $("listaTreinos").innerHTML = grupos.map((grupo) => `
-    <section class="training-section ${grupo.planejado ? "" : "training-off"}">
+    <section class="training-section ${grupo.planejado ? "" : "training-off"} ${getWorkoutState().currentDay === grupo.groupIndex ? "current-training-day" : ""}" data-group-index="${grupo.groupIndex}">
       <div class="training-head">
         <div>
           <span class="day-chip">${grupo.planejado ? "Planejado" : "Extra"} da semana</span>
           <h4 class="day-title">${grupo.diaLabel} · ${grupo.titulo}</h4>
           <p><strong>${grupo.titulo}</strong> · ${grupo.desc}</p>
-          <small class="training-summary">${grupo.exercicios.filter((item) => item.grupo !== "Cardio").length} exercícios de musculação + ${grupo.exercicios.some((item) => item.grupo === "Cardio") ? "cardio 20 a 30 min" : "sem cardio neste filtro"}</small>
+          <div class="training-summary">
+            <strong>${grupo.exercicios.length} exercícios</strong>
+            <span>${grupo.totalSeries} séries planejadas</span>
+            <span>Vídeos disponíveis offline</span>
+          </div>
+          <div class="protocol-flow" aria-label="Ordem recomendada do treino">
+            <span><b>01</b>Aquecimento 5 min</span>
+            <span><b>02</b>Exercícios compostos</span>
+            <span><b>03</b>Isoladores e core</span>
+          </div>
           <div class="tags">${grupo.tags.map((tag) => `<span class="${tagClass(tag)}">${tag}</span>`).join("")}</div>
         </div>
       </div>
@@ -1521,7 +1663,7 @@ function renderTreinos() {
           const videoComTempo = `${exercicio.video}#t=${Math.max(0.15, exercicio.inicio || 0)}`;
 
           return `
-            <article class="exercise-card ${exercicio.grupo === "Cardio" ? "cardio-finisher" : ""} ${concluido ? "done concluido" : ""}">
+            <article class="exercise-card ${exercicio.grupo === "Cardio" ? "cardio-finisher" : ""} ${concluido ? "done concluido" : ""}" data-exercise-id="${exercicio.id}">
               <div class="completion-badge" aria-hidden="true">✓</div>
               <div class="media exercise-media">
                 <video muted loop playsinline controls preload="none" poster="${posterDoVideo(exercicio.video, exercicio.grupo)}" data-start="${exercicio.inicio || 0}" data-grupo="${exercicio.grupo}" data-nome="${exercicio.video.replace("./assets/videos/", "")}" onloadedmetadata="prepararVideoTreino(this)" onerror="videoPreviewErro(this)">
@@ -1581,7 +1723,92 @@ function renderTreinos() {
       </div>
     </section>
   `).join("");
+  renderDailyProgress(grupos, historico);
   requestAnimationFrame(iniciarPreviewsVisiveis);
+}
+
+function renderDailyProgress(grupos, historico = getHistorico()) {
+  const panel = $("dailyProgressPanel");
+  if (!panel || !grupos.length) return;
+  const state = getWorkoutState();
+  const atual = grupos.find((grupo) => grupo.groupIndex === state.currentDay) || grupos.find((grupo) => grupo.planejado) || grupos[0];
+  if (atual.groupIndex !== state.currentDay) saveWorkoutState({ ...state, currentDay: atual.groupIndex });
+  const concluidos = atual.exercicios.filter((exercicio) => historico.includes(exercicio.id)).length;
+  const total = Math.max(1, atual.exercicios.length);
+  const percentual = Math.round((concluidos / total) * 100);
+
+  panel.hidden = false;
+  $("dailyProgressTitle").textContent = `${atual.diaLabel} · ${atual.titulo}`;
+  $("dailyProgressText").textContent = `${concluidos}/${total} exercícios concluídos`;
+  $("dailyProgressPercent").textContent = `${percentual}%`;
+  $("dailyProgressFill").style.width = `${percentual}%`;
+  const track = panel.querySelector(".daily-progress-track");
+  track?.setAttribute("aria-valuenow", String(percentual));
+  $("daySwitcher").innerHTML = grupos.map((grupo) => `
+    <button class="${grupo.groupIndex === atual.groupIndex ? "active" : ""}" type="button" onclick="setCurrentTrainingDay(${grupo.groupIndex})" aria-label="Selecionar ${grupo.diaLabel}">
+      ${grupo.diaLabel.replace("-feira", "").slice(0, 3)}
+    </button>
+  `).join("");
+}
+
+function setCurrentTrainingDay(index, scrollToSection = true) {
+  const state = getWorkoutState();
+  saveWorkoutState({ ...state, currentDay: Math.max(0, Math.min(4, safeNumber(index, 0))) });
+  renderTreinos();
+  if (scrollToSection) {
+    document.querySelector(`[data-group-index="${index}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function registrarDiaConcluido(groupIndex) {
+  const state = getWorkoutState();
+  const grupo = planoMuscularSemanal[groupIndex];
+  if (!grupo) return;
+  const chave = `${dataLocalKey()}:${groupIndex}`;
+  const workouts = state.workouts.some((item) => item.key === chave)
+    ? state.workouts
+    : [...state.workouts, {
+        key: chave,
+        data: dataLocalKey(),
+        groupIndex,
+        titulo: `${grupo.diaLabel} · ${grupo.titulo}`,
+        concluidoEm: new Date().toISOString()
+      }];
+  if (state.celebrations.includes(chave)) {
+    saveWorkoutState({ ...state, workouts });
+    return;
+  }
+  saveWorkoutState({ ...state, workouts, celebrations: [...state.celebrations, chave] });
+  mostrarCelebracao(grupo);
+}
+
+function finalizarAcaoDeExercicio(id) {
+  requestAnimationFrame(() => {
+    const card = [...document.querySelectorAll(".exercise-card")].find((item) => item.dataset.exerciseId === id);
+    if (!card) return;
+    card.classList.add("completion-pop");
+    window.setTimeout(() => card.classList.remove("completion-pop"), 650);
+    const section = card.closest(".training-section");
+    const cards = [...(section?.querySelectorAll(".exercise-card") || [])];
+    if (cards.length && cards.every((item) => item.classList.contains("concluido"))) {
+      registrarDiaConcluido(safeNumber(section.dataset.groupIndex, 0));
+    }
+  });
+}
+
+function mostrarCelebracao(grupo) {
+  const modal = $("celebrationModal");
+  $("celebrationText").textContent = `${grupo.diaLabel} · ${grupo.titulo} finalizado. Cargas, séries e conclusão foram salvas neste dispositivo.`;
+  $("celebrationConfetti").innerHTML = Array.from({ length: 26 }, (_, index) => (
+    `<i style="--x:${(index * 37) % 100}%;--delay:${(index % 7) * .08}s;--color:${index % 3}"></i>`
+  )).join("");
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function fecharCelebracao() {
+  $("celebrationModal").classList.remove("show");
+  $("celebrationModal").setAttribute("aria-hidden", "true");
 }
 
 function toggleTreino(dia) {
@@ -1594,7 +1821,8 @@ function toggleTreino(dia) {
   let historico = getHistorico();
   const exercicio = gruposExercicios.flatMap((grupo) => grupo.exercicios).find((item) => item.id === dia);
 
-  if (historico.includes(dia)) {
+  const concluindo = !historico.includes(dia);
+  if (!concluindo) {
     historico = historico.filter((item) => item !== dia);
     const progress = getSeriesProgress();
     progress[dia] = 0;
@@ -1622,6 +1850,7 @@ function toggleTreino(dia) {
     renderGrafico();
     renderMetas();
   }
+  if (concluindo) finalizarAcaoDeExercicio(dia);
 }
 
 function previewVideo(box) {
@@ -1761,6 +1990,11 @@ async function abrirVideoFlutuante() {
       await document.exitPictureInPicture();
     } else {
       await video.requestPictureInPicture();
+    }
+
+    if (objetivo === "forca" && item.grupo === "forca") {
+      item.series = "5 séries x 4 a 6 repetições";
+      item.desc = `${item.desc} Prioridade para força funcional, técnica sólida e descansos completos.`;
     }
   } catch {
     toast("Inicie o vídeo e tente abrir a janela flutuante novamente.");
@@ -2559,6 +2793,7 @@ $("btnConfirmarLimpeza").addEventListener("click", () => {
   localStorage.removeItem("acafActivityLog");
   localStorage.removeItem("acafStreak");
   localStorage.removeItem("acafSemanaPremiada");
+  localStorage.removeItem(WORKOUT_STATE_KEY);
   location.reload();
 });
 $("btnSemana").addEventListener("click", () => {
@@ -2571,6 +2806,10 @@ $("btnResetSemana").addEventListener("click", () => {
   const ficha = getFicha();
   if (ficha) atualizarInterface(ficha);
   toast("Semana reiniciada.");
+});
+$("btnCloseCelebration").addEventListener("click", fecharCelebracao);
+$("celebrationModal").addEventListener("click", (event) => {
+  if (event.target === $("celebrationModal")) fecharCelebracao();
 });
 $("fecharModal").addEventListener("click", fecharVideo);
 $("modalFecharBaixo").addEventListener("click", fecharVideo);
