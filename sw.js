@@ -1,9 +1,9 @@
-const CACHE_NAME = "acaf-centro-performance-v42-daily-progress";
+const CACHE_NAME = "acaf-centro-performance-v47-plano-adaptado";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./style.css?v=acaf-premium-20260611-11",
-  "./script.js?v=acaf-premium-20260611-11",
+  "./style.css?v=acaf-premium-20260616-16",
+  "./script.js?v=acaf-premium-20260616-16",
   "./manifest.webmanifest",
   "./assets/img/forca.jpg",
   "./assets/img/cardio.jpg",
@@ -17,6 +17,10 @@ const APP_SHELL = [
   "./assets/videos/triceps-polia-barra.mp4",
   "./assets/videos/puxada-frontal.mp4",
   "./assets/videos/remada-baixa.mp4",
+  "./assets/videos/costas.mp4",
+  "./assets/videos/peito.mp4",
+  "./assets/videos/pernas.mp4",
+  "./assets/videos/ombro.mp4",
   "./assets/videos/rosca-direta.mp4",
   "./assets/videos/leg-press-45.mp4",
   "./assets/videos/cadeira-extensora.mp4",

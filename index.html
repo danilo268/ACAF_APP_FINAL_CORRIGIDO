@@ -8,7 +8,7 @@
   <title>ACAF - Centro de Performance</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./assets/img/ombro-profissional.png" />
-  <link rel="stylesheet" href="style.css?v=acaf-premium-20260611-11" />
+  <link rel="stylesheet" href="style.css?v=acaf-premium-20260616-16" />
 </head>
 <body>
   <aside class="sidebar">
@@ -145,7 +145,7 @@
       </div>
 
       <div class="program-overview" aria-label="Resumo do programa semanal">
-        <article><span>Programa</span><strong>5 dias planejados</strong><small>Divisão equilibrada por grupo muscular</small></article>
+        <article><span>Programa</span><strong>6 dias planejados</strong><small>Divisão equilibrada por grupo muscular</small></article>
         <article><span>Volume</span><strong>5 a 6 exercícios</strong><small>Por sessão, adaptados ao nível do aluno</small></article>
         <article><span>Execução</span><strong>Vídeos específicos</strong><small>Cada nome corresponde ao movimento exibido</small></article>
         <article><span>Progresso</span><strong>Cargas e séries</strong><small>Histórico salvo para evolução contínua</small></article>
@@ -193,7 +193,7 @@
               <h4>Performance da semana</h4>
               <p>Volume estimado por treino concluído.</p>
             </div>
-            <strong id="totalSemana">0/5</strong>
+              <strong id="totalSemana">0/6</strong>
           </div>
           <div class="chart-bars" id="grafico"></div>
         </div>
@@ -399,17 +399,71 @@
               <option value="3">3x por semana</option>
               <option value="4">4x por semana</option>
               <option value="5">5x por semana</option>
+              <option value="6">6x por semana</option>
             </select>
           </label>
           <label>Condição
             <select id="condicao">
               <option value="sem_restricao">Sem restrição</option>
               <option value="joelho">Cuidado com joelho</option>
+              <option value="joelho_cirurgia">Joelho operado/parafuso</option>
+              <option value="braco_assimetrico">Braço com limitação/assimetria</option>
               <option value="ombro">Cuidado com ombro</option>
               <option value="coluna">Cuidado com coluna</option>
+              <option value="multipla">Mais de uma limitação</option>
+            </select>
+          </label>
+          <label>Perfil de atenção
+            <select id="perfilAtencao">
+              <option value="adulto">Adulto sem necessidade especial</option>
+              <option value="idoso">Idoso ou mobilidade reduzida</option>
+              <option value="crianca">Criança/adolescente</option>
+              <option value="pcd">Pessoa com deficiência</option>
+              <option value="reabilitacao">Pós-lesão, cirurgia ou reabilitação</option>
+            </select>
+          </label>
+          <label>Dor atual
+            <select id="dorAtual">
+              <option value="0">Sem dor</option>
+              <option value="1">Leve, controlada</option>
+              <option value="2">Moderada</option>
+              <option value="3">Forte ou piorando</option>
+            </select>
+          </label>
+          <label>Fraqueza/perda muscular
+            <select id="perdaForca">
+              <option value="nenhuma">Não percebo</option>
+              <option value="leve">Leve</option>
+              <option value="visivel">Visível ou assimetria</option>
+              <option value="funcional">Atrapalha tarefas do dia a dia</option>
+            </select>
+          </label>
+          <label>Dificuldade principal
+            <select id="dificuldadeFuncional">
+              <option value="nenhuma">Nenhuma</option>
+              <option value="subir_moto">Subir na moto</option>
+              <option value="escadas">Subir escadas</option>
+              <option value="levantar_cadeira">Levantar da cadeira</option>
+              <option value="caminhar">Caminhar por tempo maior</option>
+              <option value="pegar_peso_braco">Pegar peso com o braço</option>
+            </select>
+          </label>
+          <label>Liberação profissional
+            <select id="liberacaoProfissional">
+              <option value="nao_informado">Ainda não informada</option>
+              <option value="medico">Liberado por médico</option>
+              <option value="fisioterapeuta">Acompanhado por fisioterapeuta</option>
+              <option value="professor">Acompanhado por professor</option>
+              <option value="sem_liberacao">Sem liberação ainda</option>
             </select>
           </label>
           <button class="primary big" id="btnGerar" type="button">Gerar ficha</button>
+        </div>
+
+        <div class="backup-actions">
+          <button class="ghost" id="btnBackup" type="button">Baixar backup</button>
+          <button class="ghost" id="btnRestaurar" type="button">Restaurar backup</button>
+          <input id="backupFile" type="file" accept="application/json,.json" hidden />
         </div>
       </section>
 
@@ -535,7 +589,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=acaf-premium-20260611-11"></script>
+  <script src="script.js?v=acaf-premium-20260616-16"></script>
 </body>
 </html>
 

@@ -63,6 +63,19 @@
     desc: "Roscas direta, alternada, Scott, martelo, cabo, concentrada e cardio final.",
     series: "5 a 8 exercícios + cardio 20 min",
     cuidado: "Cotovelos fixos, punhos firmes e sem balançar o tronco."
+  },
+  {
+    dia: "Sábado",
+    titulo: "Full body técnico",
+    grupo: "forca",
+    img: "./assets/img/treino-profissional.png",
+    video: "./assets/videos/prancha-abdominal.mp4",
+    tempo: 70,
+    kcal: 430,
+    nivel: "Intermediário",
+    desc: "Sessão completa com pernas, peito, costas, ombros, braços e core.",
+    series: "5 a 6 exercícios + cardio leve opcional",
+    cuidado: "Use cargas moderadas, foco em técnica e recuperação para fechar a semana."
   }
 ];
 
@@ -311,6 +324,15 @@ const gruposExercicios = [
         desc: "Mantenha o tronco firme, puxe a pegada em direção ao abdômen e segure um segundo na contração."
       },
       {
+        id: "pullover-maquina",
+        titulo: "Pullover na máquina",
+        video: "./assets/videos/costas.mp4",
+        inicio: 0,
+        grupo: "Costas",
+        series: "3 séries x 10 a 12 repetições | descanso 60s",
+        desc: "Braços firmes, peito alto e movimento em arco para ativar dorsais sem transformar em tríceps."
+      },
+      {
         id: "rosca-alternada",
         titulo: "Rosca alternada",
         video: "./assets/videos/rosca-alternada.mp4",
@@ -366,13 +388,13 @@ const gruposExercicios = [
         desc: "Pegada pronada para antebraço e braquial, punhos firmes e movimento limpo."
       },
       {
-        id: "remada-unilateral",
-        titulo: "Remada unilateral no cabo",
+        id: "elevacao-lateral-polia",
+        titulo: "Elevação lateral na polia",
         video: "./assets/videos/remada-unilateral.mp4",
         inicio: 0,
-        grupo: "Costas",
-        series: "3 séries x 10 a 12 por lado | descanso 60s",
-        desc: "Trabalhe um lado de cada vez, mantenha o tronco firme e conduza o cotovelo para trás sem girar o corpo."
+        grupo: "Ombros",
+        series: "3 a 4 séries x 10 a 15 repetições por lado | descanso 45 a 60s",
+        desc: "Fique de lado para a polia baixa, eleve o braço até a linha do ombro e controle a descida sem inclinar o tronco."
       },
       {
         id: "rosca-martelo",
@@ -689,40 +711,54 @@ const planoMuscularSemanal = [
     filtro: "forca",
     ids: [
       "desenvolvimento-militar",
+      "elevacao-lateral-polia",
       "face-pull-corda",
       "triceps-polia-barra",
       "triceps-corda",
-      "triceps-frances-corda",
-      "triceps-coice"
+      "triceps-frances-corda"
     ]
   },
   {
     diaLabel: "Quinta-feira",
-    titulo: "Costas e bíceps",
-    desc: "Puxadas e remadas para dorsal e postura, seguidas de estímulo completo de bíceps.",
-    tags: ["Costas", "75 min", "Força"],
+    titulo: "Costas e estabilidade escapular",
+    desc: "Puxadas, remadas e posterior de ombro para dorsal, postura e controle escapular sem repetir o bloco de bíceps.",
+    tags: ["Costas", "70 min", "Força"],
     filtro: "forca",
     ids: [
       "puxada-frontal",
       "remada-baixa",
-      "remada-unilateral",
-      "face-pull-corda",
-      "remada-maquina-neutra"
+      "remada-maquina-neutra",
+      "pulldown-corda",
+      "crucifixo-inverso"
     ]
   },
   {
     diaLabel: "Sexta-feira",
-    titulo: "Bíceps e core",
-    desc: "Variações de pegada para braços e estabilidade abdominal para fechar a semana.",
+    titulo: "Bíceps completo e core",
+    desc: "Bíceps sem repetição de padrão: barra, cabo, banco Scott, pegada neutra e finalização de core.",
     tags: ["Bíceps", "55 min", "Força"],
     filtro: "forca",
     ids: [
       "rosca-direta",
-      "rosca-alternada",
-      "rosca-martelo",
       "rosca-cabo",
       "rosca-scott-maquina",
+      "rosca-martelo",
       "prancha-abdominal"
+    ]
+  },
+  {
+    diaLabel: "Sábado",
+    titulo: "Full body técnico",
+    desc: "Protocolo completo para sábado com movimentos seguros de corpo inteiro.",
+    tags: ["Full body", "70 min", "Força"],
+    filtro: "forca",
+    ids: [
+      "agachamento-guiado",
+      "supino-maquina",
+      "pullover-maquina",
+      "triceps-maquina",
+      "rosca-inversa",
+      "dead-bug"
     ]
   }
 ];
@@ -734,26 +770,34 @@ const videoRealPorExercicio = {
   "puxada-frontal": "./assets/videos/puxada-frontal.mp4",
   "remada-baixa": "./assets/videos/remada-baixa.mp4",
   "rosca-direta": "./assets/videos/rosca-direta.mp4",
+  "pulldown-corda": "./assets/videos/costas.mp4",
+  "pullover-maquina": "./assets/videos/costas.mp4",
   "leg-press-45": "./assets/videos/leg-press-45.mp4",
   "cadeira-extensora": "./assets/videos/cadeira-extensora.mp4",
   "levantamento-romeno": "./assets/videos/levantamento-romeno.mp4",
   "panturrilha-leg": "./assets/videos/panturrilha-leg-press.mp4",
   "avanco-halteres": "./assets/videos/avanco-halteres.mp4",
+  "agachamento-guiado": "./assets/videos/pernas.mp4",
   "prancha-cardio": "./assets/videos/prancha-abdominal.mp4",
   "prancha-abdominal": "./assets/videos/prancha-abdominal.mp4",
+  "dead-bug": "./assets/videos/ombro.mp4",
   "desenvolvimento-militar": "./assets/videos/desenvolvimento-militar.mp4",
   "face-pull-corda": "./assets/videos/face-pull-corda.mp4",
+  "crucifixo-inverso": "./assets/videos/ombro.mp4",
   "supino-halteres": "./assets/videos/supino-halteres.mp4",
   "supino-inclinado-barra": "./assets/videos/supino-inclinado-barra.mp4",
+  "supino-maquina": "./assets/videos/peito.mp4",
   "mergulho-paralelas": "./assets/videos/mergulho-paralelas.mp4",
   "triceps-corda": "./assets/videos/triceps-cabo.mp4",
   "triceps-frances-corda": "./assets/videos/triceps-frances-halter.mp4",
   "triceps-coice": "./assets/videos/triceps-coice.mp4",
-  "remada-unilateral": "./assets/videos/remada-unilateral.mp4",
+  "triceps-maquina": "./assets/videos/peito.mp4",
+  "elevacao-lateral-polia": "./assets/videos/remada-unilateral.mp4",
   "rosca-alternada": "./assets/videos/rosca-alternada.mp4",
   "rosca-martelo": "./assets/videos/rosca-martelo.mp4",
   "rosca-cabo": "./assets/videos/rosca-cabo.mp4",
   "rosca-scott-maquina": "./assets/videos/rosca-scott.mp4",
+  "rosca-inversa": "./assets/videos/costas.mp4",
   "remada-maquina-neutra": "./assets/videos/remada-sentada-fechada.mp4"
 };
 
@@ -767,6 +811,101 @@ let exerciciosAtuais = gruposExercicios.flatMap((grupo) => grupo.exercicios);
 
 const $ = (id) => document.getElementById(id);
 const WORKOUT_STATE_KEY = "acafWorkoutState";
+const ACAF_STORAGE_KEYS = [
+  "acafFicha",
+  "acafHistorico",
+  "acafRegistrosVisuais",
+  "acafCargaHistorico",
+  "acafRascunhosExercicios",
+  "acafSeriesProgress",
+  "acafActivityLog",
+  "acafStreak",
+  "acafSemanaPremiada",
+  WORKOUT_STATE_KEY
+];
+
+function getDemoFicha() {
+  return {
+    demo: true,
+    nome: "Aluno ACAF",
+    idade: 21,
+    sexo: "masculino",
+    peso: 86,
+    altura: 1.84,
+    objetivo: "forca",
+    nivel: "intermediario",
+    experiencia: 18,
+    historicoTreino: 24,
+    frequencia: 6,
+    condicao: "sem_restricao",
+    perfilAtencao: "adulto",
+    dorAtual: "0",
+    perdaForca: "nenhuma",
+    dificuldadeFuncional: "nenhuma",
+    liberacaoProfissional: "nao_informado",
+    tipoUsuario: "ambos",
+    professorNome: "Equipe ACAF",
+    pesoMeta: 82,
+    fotoPerfil: "",
+    fotoProfessor: "",
+    imc: 25.4,
+    agua: 3.01,
+    proteina: 172,
+    calorias: 3100,
+    data: new Date().toLocaleDateString("pt-BR")
+  };
+}
+
+function hasFichaSalva() {
+  return Boolean(localStorage.getItem("acafFicha"));
+}
+
+function getPlanoAdaptado(ficha = {}) {
+  const idade = safeNumber(ficha.idade);
+  const dor = safeNumber(ficha.dorAtual);
+  const condicao = ficha.condicao || "sem_restricao";
+  const perfil = ficha.perfilAtencao || "adulto";
+  const perda = ficha.perdaForca || "nenhuma";
+  const dificuldade = ficha.dificuldadeFuncional || "nenhuma";
+  const liberacao = ficha.liberacaoProfissional || "nao_informado";
+  const cuidadoBraco = condicao === "braco_assimetrico" || condicao === "multipla" || dificuldade === "pegar_peso_braco";
+  const cuidadoJoelho = condicao === "joelho" || condicao === "joelho_cirurgia" || condicao === "multipla" || ["subir_moto", "escadas", "levantar_cadeira"].includes(dificuldade);
+  const reabilitacao = perfil === "reabilitacao" || perfil === "pcd" || perfil === "idoso" || condicao === "joelho_cirurgia" || perda === "funcional" || perda === "visivel";
+  const precisaLiberacao = dor >= 2 || condicao === "joelho_cirurgia" || perda === "funcional" || liberacao === "sem_liberacao";
+  const crianca = perfil === "crianca" || (idade > 0 && idade < 16);
+  const foco = [];
+  if (cuidadoBraco) foco.push("braço com carga assistida ou unilateral leve");
+  if (cuidadoJoelho) foco.push("joelho com baixo impacto e fortalecimento progressivo");
+  if (perda === "funcional" || perda === "visivel") foco.push("recuperação de força e massa muscular");
+  if (perfil === "idoso") foco.push("equilíbrio, sentar/levantar e prevenção de quedas");
+  if (crianca) foco.push("coordenação, postura e técnica sem carga máxima");
+  if (!foco.length) foco.push("progressão segura e técnica limpa");
+  return { cuidadoBraco, cuidadoJoelho, reabilitacao, precisaLiberacao, crianca, dor, foco };
+}
+
+function recomendacoesAdaptadas(ficha = {}) {
+  const plano = getPlanoAdaptado(ficha);
+  const itens = [];
+  if (plano.precisaLiberacao) {
+    itens.push("Antes de aumentar carga, confirmar liberação com médico/fisioterapeuta/professor, principalmente se houver dor moderada/forte, cirurgia, parafuso ou perda funcional de força.");
+  }
+  if (plano.cuidadoBraco) {
+    itens.push("Para braço com limitação: evitar carga livre pesada, priorizar máquina/cabo leve, amplitude confortável, execução unilateral controlada e comparar força sem forçar o lado menor.");
+  }
+  if (plano.cuidadoJoelho) {
+    itens.push("Para joelho operado ou fraco: evitar impacto, salto e agachamento profundo; começar com apoio, bike leve, cadeira extensora leve, sentar/levantar e fortalecimento sem dor.");
+  }
+  if (ficha.perdaForca === "funcional" || ficha.perdaForca === "visivel") {
+    itens.push("Para atrofia/fraqueza: registrar carga, reps e dor a cada treino; subir volume devagar, mantendo 2 a 3 repetições de reserva e descanso maior.");
+  }
+  if (plano.crianca) {
+    itens.push("Para crianças/adolescentes: foco em coordenação, postura e brincadeiras ativas; nada de teste de carga máxima.");
+  }
+  if (ficha.perfilAtencao === "pcd") {
+    itens.push("Para PcD: adaptar posição, apoio, pegada e amplitude conforme conforto, com supervisão presencial quando houver assimetria ou perda de força.");
+  }
+  return itens.length ? itens : ["Treino liberado para progressão comum, mantendo técnica, aquecimento e ausência de dor."];
+}
 
 function safeNumber(value, fallback = 0) {
   const number = Number(value);
@@ -789,15 +928,15 @@ function escapeAttr(value) {
 
 function getFicha() {
   try {
-    return JSON.parse(localStorage.getItem("acafFicha")) || null;
+    return JSON.parse(localStorage.getItem("acafFicha")) || getDemoFicha();
   } catch {
-    return null;
+    return getDemoFicha();
   }
 }
 
 function diaPadraoDoTreino() {
   const diaSemana = new Date().getDay();
-  return diaSemana >= 1 && diaSemana <= 5 ? diaSemana - 1 : 0;
+  return diaSemana >= 1 && diaSemana <= 6 ? diaSemana - 1 : 0;
 }
 
 function getWorkoutState() {
@@ -809,9 +948,10 @@ function getWorkoutState() {
   }
   try {
     const saved = JSON.parse(localStorage.getItem(WORKOUT_STATE_KEY)) || {};
+    const ultimoDia = Math.max(0, treinosBase.length - 1);
     return {
       completed: Array.isArray(saved.completed) ? saved.completed : legacyCompleted,
-      currentDay: Math.max(0, Math.min(4, safeNumber(saved.currentDay, diaPadraoDoTreino()))),
+      currentDay: Math.max(0, Math.min(ultimoDia, safeNumber(saved.currentDay, diaPadraoDoTreino()))),
       workouts: Array.isArray(saved.workouts) ? saved.workouts : [],
       celebrations: Array.isArray(saved.celebrations) ? saved.celebrations : [],
       updatedAt: saved.updatedAt || null
@@ -874,6 +1014,56 @@ function getRegistrosVisuais() {
 
 function setRegistrosVisuais(registros) {
   localStorage.setItem("acafRegistrosVisuais", JSON.stringify(registros));
+}
+
+function coletarBackupLocal() {
+  const storage = ACAF_STORAGE_KEYS.reduce((dados, key) => {
+    const value = localStorage.getItem(key);
+    if (value !== null) dados[key] = value;
+    return dados;
+  }, {});
+  if (!storage.acafFicha) storage.acafFicha = JSON.stringify(getFicha());
+  return {
+    app: "ACAF Centro de Performance",
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    storage
+  };
+}
+
+function baixarBackupLocal() {
+  const ficha = getFicha();
+  const data = new Date().toISOString().slice(0, 10);
+  const nome = `acaf-backup-${(ficha.nome || "aluno").toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${data}.json`;
+  const blob = new Blob([JSON.stringify(coletarBackupLocal(), null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = nome;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+  toast("Backup baixado com ficha, treinos, cargas e fotos salvas.");
+}
+
+async function restaurarBackupLocal(file) {
+  if (!file) return;
+  try {
+    const backup = JSON.parse(await file.text());
+    const storage = backup.storage || backup;
+    if (!storage || typeof storage !== "object" || !storage.acafFicha) {
+      toast("Backup inválido. Escolha um arquivo JSON gerado pelo ACAF.");
+      return;
+    }
+    ACAF_STORAGE_KEYS.forEach((key) => {
+      if (storage[key] !== undefined) localStorage.setItem(key, String(storage[key]));
+    });
+    toast("Backup restaurado. Recarregando o app...");
+    setTimeout(() => location.reload(), 900);
+  } catch {
+    toast("Não foi possível restaurar esse backup.");
+  }
 }
 
 function setHistorico(historico) {
@@ -1196,7 +1386,8 @@ function diaCompleto(dia) {
     Terça: "Terça-feira",
     Quarta: "Quarta-feira",
     Quinta: "Quinta-feira",
-    Sexta: "Sexta-feira"
+    Sexta: "Sexta-feira",
+    Sábado: "Sábado"
   }[dia] || dia;
 }
 
@@ -1245,6 +1436,7 @@ function nivelTreinoRank(ficha) {
 }
 
 function nivelDoAluno(ficha) {
+  if (getPlanoAdaptado(ficha).reabilitacao) return "Adaptado";
   if (!ficha?.nivel) return "Nível a definir";
   if (ficha?.condicao && ficha.condicao !== "sem_restricao") return "Controlado";
   if (experienciaRank(ficha.experiencia) < 6 && historicoRank(ficha) >= 12) return "Retorno";
@@ -1255,18 +1447,37 @@ function nivelDoAluno(ficha) {
 
 function exercicioBloqueado(exercicio, ficha) {
   if (!ficha) return false;
+  const adaptado = getPlanoAdaptado(ficha);
   if (exercicio.nivelMin && nivelTreinoRank(ficha) < nivelRank(exercicio.nivelMin)) return true;
   if (exercicio.experienciaMin && experienciaEfetiva(ficha) < exercicio.experienciaMin) return true;
   if (exercicio.evitar?.includes(ficha.condicao)) return true;
+  if (adaptado.precisaLiberacao && ["mergulho-paralelas", "agachamento-bulgaro", "levantamento-romeno"].includes(exercicio.id)) return true;
+  if (adaptado.cuidadoBraco && ["supino-reto", "supino-halteres", "supino-inclinado-barra", "desenvolvimento-militar", "mergulho-paralelas", "triceps-frances-corda", "triceps-coice"].includes(exercicio.id)) return true;
+  if (adaptado.cuidadoJoelho && ["avanco-halteres", "agachamento-bulgaro", "agachamento-guiado", "leg-press-45"].includes(exercicio.id)) return true;
   if (ficha.nivel === "iniciante" && historicoRank(ficha) < 12 && ["levantamento-romeno", "desenvolvimento-militar"].includes(exercicio.id)) return true;
-  if (ficha.condicao === "ombro" && ["desenvolvimento-militar", "face-pull-corda"].includes(exercicio.id)) return true;
-  if (ficha.condicao === "coluna" && ["levantamento-romeno"].includes(exercicio.id)) return true;
+  if (ficha.condicao === "ombro" && ["desenvolvimento-militar", "face-pull-corda", "elevacao-lateral-polia"].includes(exercicio.id)) return true;
+  if (ficha.condicao === "coluna" && ["levantamento-romeno", "agachamento-guiado"].includes(exercicio.id)) return true;
   return false;
 }
 
 function adaptarExercicio(exercicio, ficha) {
   if (!ficha) return { ...exercicio, dificuldade: "Personal" };
+  const adaptado = getPlanoAdaptado(ficha);
   const item = { ...exercicio, dificuldade: nivelDoAluno(ficha) };
+  if (adaptado.reabilitacao) {
+    item.series = item.grupo === "Cardio"
+      ? "10 a 20 minutos | leve, sem dor e com conversa possível"
+      : "2 a 3 séries x 8 a 12 repetições | carga leve | descanso 90s";
+    item.desc = `${item.desc} Modo adaptado: use carga leve, amplitude confortável, apoio quando necessário e pare se a dor passar de leve para moderada.`;
+  }
+  if (adaptado.cuidadoBraco && ["Peito", "Ombros", "Tríceps", "Bíceps"].includes(item.grupo)) {
+    item.series = "2 séries x 10 a 12 repetições | carga muito leve ou elástico | descanso 90s";
+    item.desc = `${item.desc} Braço com limitação: priorize controle, não compare cargas entre lados e use assistência do professor/fisioterapeuta.`;
+  }
+  if (adaptado.cuidadoJoelho && item.grupo === "Pernas") {
+    item.series = "2 a 3 séries x 10 repetições | amplitude curta sem dor | descanso 90s";
+    item.desc = `${item.desc} Joelho sensível/operado: evite travar o joelho, descer fundo ou sustentar carga sem apoio.`;
+  }
   if (item.grupo === "Cardio") {
     item.series = ficha.objetivo === "emagrecer" || ficha.objetivo === "definir" ? "25 a 30 minutos | ritmo moderado" : "20 minutos | ritmo moderado";
     if (ficha.objetivo === "resistencia") item.series = "25 a 30 minutos | zona confortável";
@@ -1318,7 +1529,6 @@ function adaptarExercicio(exercicio, ficha) {
       "desenvolvimento-militar",
       "puxada-frontal",
       "remada-baixa",
-      "remada-unilateral",
       "remada-maquina-neutra"
     ]);
     item.series = compostos.has(item.id)
@@ -1339,13 +1549,32 @@ function adaptarExercicio(exercicio, ficha) {
     item.desc = `${item.desc} Objetivo de resistência: movimento contínuo, respiração controlada e intensidade sustentável.`;
   }
   if (ficha.condicao === "joelho" && item.grupo === "Pernas") item.desc = `${item.desc} Trabalhe sem dor no joelho e com amplitude confortavel.`;
+  if (ficha.condicao === "joelho_cirurgia" && item.grupo === "Pernas") item.desc = `${item.desc} Cirurgia/parafuso no joelho: progressão só com liberação profissional e sem dor articular.`;
+  if (ficha.condicao === "braco_assimetrico" && ["Peito", "Ombros", "Tríceps", "Bíceps"].includes(item.grupo)) item.desc = `${item.desc} Braço assimétrico: objetivo é função e estabilidade, não igualar carga rapidamente.`;
   if (ficha.condicao === "ombro" && item.grupo !== "Cardio") item.desc = `${item.desc} Ombros baixos, escapulas controladas e sem amplitude dolorosa.`;
   if (ficha.condicao === "coluna") item.desc = `${item.desc} Coluna neutra, abdomen firme e carga conservadora.`;
+  if (adaptado.reabilitacao || adaptado.precisaLiberacao) {
+    item.dificuldade = "Adaptado";
+    item.series = item.grupo === "Cardio"
+      ? "10 a 20 minutos | leve, sem dor e com conversa possível"
+      : "2 a 3 séries x 8 a 12 repetições | carga leve | descanso 90s";
+  }
+  if (adaptado.cuidadoBraco && ["Peito", "Ombros", "Tríceps", "Bíceps"].includes(item.grupo)) {
+    item.dificuldade = "Braço protegido";
+    item.series = "2 séries x 10 a 12 repetições | carga muito leve ou elástico | descanso 90s";
+  }
+  if (adaptado.cuidadoJoelho && item.grupo === "Pernas") {
+    item.dificuldade = "Joelho protegido";
+    item.series = "2 a 3 séries x 10 repetições | amplitude curta sem dor | descanso 90s";
+  }
   return item;
 }
 
 function volumePorPerfil(ficha) {
   if (!ficha) return 8;
+  const adaptado = getPlanoAdaptado(ficha);
+  if (adaptado.precisaLiberacao || adaptado.reabilitacao) return 5;
+  if (adaptado.crianca) return 4;
   const efetiva = experienciaEfetiva(ficha);
   if (ficha.nivel === "avancado" || efetiva >= 24) return 8;
   if (ficha.nivel === "intermediario" || efetiva >= 12) return 7;
@@ -1369,15 +1598,16 @@ function posterDoVideo(url, grupo) {
 
 function ajustarTreinos(objetivo, nivel, frequencia, condicao) {
   const multiplicadorNivel = { iniciante: 0.88, intermediario: 1, avancado: 1.12 }[nivel] || 1;
-  const diasPermitidos = Math.max(1, safeNumber(frequencia, 5));
+  const diasPermitidos = Math.max(1, Math.min(6, safeNumber(frequencia, 5)));
   const planejamento = {
     1: [0],
     2: [0, 3],
     3: [0, 2, 4],
     4: [0, 1, 2, 4],
-    5: [0, 1, 2, 3, 4]
+    5: [0, 1, 2, 3, 4],
+    6: [0, 1, 2, 3, 4, 5]
   };
-  const diasPlanejados = new Set(planejamento[Math.min(diasPermitidos, 5)] || planejamento[5]);
+  const diasPlanejados = new Set(planejamento[diasPermitidos] || planejamento[5]);
 
   return treinosBase.map((treino, index) => {
     const item = { ...treino, ...midiasOriginais[treino.dia] };
@@ -1431,8 +1661,17 @@ function gerarFicha() {
   const nivel = $("nivel").value;
   const experiencia = safeNumber($("experiencia").value, 0);
   const historicoTreino = safeNumber($("historicoTreino").value, 0);
-  const frequencia = Math.max(1, safeNumber($("frequencia").value, 3));
+  let frequencia = Math.max(1, safeNumber($("frequencia").value, 3));
   const condicao = $("condicao").value;
+  const perfilAtencao = $("perfilAtencao").value;
+  const dorAtual = $("dorAtual").value;
+  const perdaForca = $("perdaForca").value;
+  const dificuldadeFuncional = $("dificuldadeFuncional").value;
+  const liberacaoProfissional = $("liberacaoProfissional").value;
+  const planoAdaptadoPreliminar = getPlanoAdaptado({ idade, condicao, perfilAtencao, dorAtual, perdaForca, dificuldadeFuncional, liberacaoProfissional });
+  if (planoAdaptadoPreliminar.reabilitacao || planoAdaptadoPreliminar.precisaLiberacao) {
+    frequencia = Math.min(frequencia, 3);
+  }
 
   limparErrosPerfil();
   const camposInvalidos = [];
@@ -1468,6 +1707,11 @@ function gerarFicha() {
     historicoTreino,
     frequencia,
     condicao,
+    perfilAtencao,
+    dorAtual,
+    perdaForca,
+    dificuldadeFuncional,
+    liberacaoProfissional,
     tipoUsuario,
     professorNome,
     pesoMeta: Number.isFinite(pesoMeta) && pesoMeta > 0 ? pesoMeta : "",
@@ -1484,7 +1728,7 @@ function gerarFicha() {
   treinosAtuais = ajustarTreinos(objetivo, nivel, frequencia, condicao);
   atualizarInterface(ficha);
   showScreen("dashboard");
-  toast("Ficha atualizada com sucesso.");
+  toast(planoAdaptadoPreliminar.reabilitacao ? "Ficha adaptada criada com segurança e progressão lenta." : "Ficha atualizada com sucesso.");
 }
 
 function pesoAtualDaEvolucao(ficha) {
@@ -1508,6 +1752,9 @@ function atualizarInterface(ficha) {
     calorias: safeNumber(ficha?.calorias)
   };
   const plano = textoObjetivo(ficha.objetivo, ficha.peso, ficha.frequencia, ficha.calorias);
+  const planoAdaptado = getPlanoAdaptado(ficha);
+  const orientacoesAdaptadas = recomendacoesAdaptadas(ficha);
+  const modoDemo = ficha.demo === true && !hasFichaSalva();
   const historico = getHistorico();
   const semana = progressoSemanal(ficha, historico);
   const concluidos = semana.concluidos.length;
@@ -1523,8 +1770,8 @@ function atualizarInterface(ficha) {
   $("alunoNomeResumo").textContent = ficha.nome || "Perfil do aluno";
   $("professorNomeResumo").textContent = professorNome;
   $("alunoMetaResumo").textContent = metaTexto;
-  $("planoSidebar").textContent = `${ficha.nome} ativo`;
-  $("sidebarResumo").textContent = plano.plano;
+  $("planoSidebar").textContent = modoDemo ? "Protocolo demo ativo" : `${ficha.nome} ativo`;
+  $("sidebarResumo").textContent = modoDemo ? "Treinos completos liberados. Salve sua ficha ou restaure um backup." : plano.plano;
   $("mPeso").textContent = formatMetric(ficha.peso, " kg", 1);
   $("mPesoMsg").textContent = `${ficha.idade} anos | ${ficha.nivel} | ${experienciaLabel(ficha.experiencia)} | ${historicoLabel(ficha.historicoTreino)}`;
   $("mImc").textContent = formatMetric(ficha.imc, "", 1);
@@ -1536,26 +1783,32 @@ function atualizarInterface(ficha) {
   $("heroNivel").textContent = ficha.nivel;
   const tempoMedio = Math.round(treinosAtuais.filter((t) => t.ativo !== false).reduce((acc, t) => acc + safeNumber(t.tempo), 0) / Math.max(1, ficha.frequencia));
   $("heroTempo").textContent = Number.isFinite(tempoMedio) ? `${tempoMedio} min` : "-- min";
-  $("resultadoTitulo").textContent = `${ficha.nome}, sua ficha ACAF está pronta.`;
-  $("resultadoTexto").textContent = plano.texto;
-  $("dataFicha").textContent = `Atualizada em ${ficha.data}`;
+  $("resultadoTitulo").textContent = modoDemo ? "Protocolo demo ACAF pronto." : planoAdaptado.reabilitacao ? `${ficha.nome}, plano adaptado com atenção especial.` : `${ficha.nome}, sua ficha ACAF está pronta.`;
+  $("resultadoTexto").textContent = modoDemo
+    ? "Nenhuma ficha salva foi encontrada, então o app abriu um protocolo completo de demonstração com 6 dias, incluindo sábado. Para personalizar, preencha o Perfil ou restaure um backup."
+    : planoAdaptado.reabilitacao
+      ? `Foco principal: ${planoAdaptado.foco.join(", ")}. O treino foi reduzido para progressão lenta, cargas leves, amplitude sem dor e controle de segurança.`
+      : plano.texto;
+  $("dataFicha").textContent = modoDemo ? "Modo demo: dados ainda não salvos" : `Atualizada em ${ficha.data}`;
   $("treinoHojeTitulo").textContent = treinoHoje ? `${diaCompleto(treinoHoje.dia)} · ${treinoHoje.titulo}` : "Semana concluída com sucesso.";
   $("treinoHojeTexto").textContent = treinoHoje ? `${treinoHoje.series}. ${treinoHoje.cuidado}` : "Reinicie a semana para começar uma nova sequência.";
 
-  $("recomendacoes").innerHTML = plano.rec
-    .map((item) => `<div class="rec"><strong>OK</strong><p>${item}</p></div>`)
+  const recomendacoes = [...(plano.rec || []), ...orientacoesAdaptadas];
+  $("recomendacoes").innerHTML = recomendacoes
+    .map((item, index) => `<div class="rec ${index >= (plano.rec || []).length ? "rec-safety" : ""}"><strong>${index >= (plano.rec || []).length ? "CUIDADO" : "OK"}</strong><p>${item}</p></div>`)
     .join("");
 
   $("melhorias").innerHTML = `
     <li>Plano ajustado para ${objetivoLabel(ficha.objetivo)}.</li>
     <li>Metas de água, proteína e calorias calculadas automaticamente.</li>
+    <li>${planoAdaptado.reabilitacao ? "Modo adaptado ativo para respeitar limitações e segurança." : "Treino padrão com progressão controlada."}</li>
     <li>${concluidos} treino(s) concluído(s) nesta semana.</li>
   `;
 
   $("pontosMelhorar").innerHTML = `
-    <li>Registrar cargas em todos os exercícios principais.</li>
-    <li>Manter pelo menos ${ficha.frequencia} treinos na semana.</li>
-    <li>Aumentar intensidade sem perder execução correta.</li>
+    <li>${planoAdaptado.precisaLiberacao ? "Confirmar liberação/acompanhamento profissional antes de aumentar carga." : "Registrar cargas em todos os exercícios principais."}</li>
+    <li>${planoAdaptado.reabilitacao ? "Registrar dor, dificuldade e controle em cada sessão." : `Manter pelo menos ${ficha.frequencia} treinos na semana.`}</li>
+    <li>${planoAdaptado.reabilitacao ? "Progredir por função: sentar/levantar, subir degrau, caminhar e estabilidade." : "Aumentar intensidade sem perder execução correta."}</li>
   `;
 
   atualizarScore(progresso);
@@ -1601,22 +1854,50 @@ function renderTreinos() {
       mapa[exercicio.id] = exercicio;
       return mapa;
     }, {});
+
+  const familiaMovimento = {
+    "rosca-alternada": "biceps-pegada-neutra-alternada",
+    "rosca-martelo": "biceps-pegada-neutra-alternada",
+    "rosca-direta": "biceps-barra-supinada",
+    "rosca-cabo": "biceps-cabo-tensao-continua",
+    "rosca-scott-maquina": "biceps-scott-maquina",
+    "puxada-frontal": "costas-puxada-vertical",
+    "pulldown-corda": "costas-puxada-vertical-braco-estendido",
+    "pullover-maquina": "costas-puxada-vertical-braco-estendido",
+    "remada-baixa": "costas-remada-horizontal",
+    "remada-maquina-neutra": "costas-remada-horizontal-neutra"
+  };
+
+  function removerRepeticoesDeMovimento(lista) {
+    const vistos = new Set();
+    return lista.filter((exercicio) => {
+      const chave = `${exercicio.grupo}:${familiaMovimento[exercicio.id] || exercicio.video || exercicio.id}`;
+      if (vistos.has(chave)) return false;
+      vistos.add(chave);
+      return true;
+    });
+  }
+
+  const usadosNaSemana = new Set();
+
   const grupos = planoMuscularSemanal
     .map((grupo, groupIndex) => {
-      const candidatos = grupo.ids
+      const candidatos = removerRepeticoesDeMovimento(grupo.ids
         .map((id) => exerciciosPorId[id])
         .filter(Boolean)
         .filter((exercicio) => Boolean(videoRealPorExercicio[exercicio.id]))
+        .filter((exercicio) => !usadosNaSemana.has(exercicio.id))
         .filter((exercicio) => !exercicioBloqueado(exercicio, ficha))
         .map((exercicio) => adaptarExercicio(exercicio, ficha))
         .filter((exercicio) => {
           const passaFiltro = filtroAtual === "todos" || grupo.filtro === filtroAtual || exercicio.grupo.toLowerCase() === filtroAtual;
           return passaFiltro;
-        });
+        }));
       const maxMusculacao = volumePorPerfil(ficha);
       const musculacao = candidatos.filter((exercicio) => exercicio.grupo !== "Cardio").slice(0, maxMusculacao);
       const cardio = candidatos.filter((exercicio) => exercicio.grupo === "Cardio").slice(0, 1);
       const exercicios = filtroAtual === "cardio" ? cardio : [...musculacao, ...cardio];
+      exercicios.forEach((exercicio) => usadosNaSemana.add(exercicio.id));
 
       return {
         ...grupo,
@@ -1640,7 +1921,7 @@ function renderTreinos() {
           <div class="training-summary">
             <strong>${grupo.exercicios.length} exercícios</strong>
             <span>${grupo.totalSeries} séries planejadas</span>
-            <span>Vídeos disponíveis offline</span>
+            <span>Sem repetição de movimentos</span>
           </div>
           <div class="protocol-flow" aria-label="Ordem recomendada do treino">
             <span><b>01</b>Aquecimento 5 min</span>
@@ -1753,7 +2034,7 @@ function renderDailyProgress(grupos, historico = getHistorico()) {
 
 function setCurrentTrainingDay(index, scrollToSection = true) {
   const state = getWorkoutState();
-  saveWorkoutState({ ...state, currentDay: Math.max(0, Math.min(4, safeNumber(index, 0))) });
+  saveWorkoutState({ ...state, currentDay: Math.max(0, Math.min(treinosBase.length - 1, safeNumber(index, 0))) });
   renderTreinos();
   if (scrollToSection) {
     document.querySelector(`[data-group-index="${index}"]`)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -2660,11 +2941,6 @@ function carregarFicha() {
   $("dataRegistro").valueAsDate = new Date();
 
   const saved = getFicha();
-  if (!saved) {
-    $("alunoAvatar").textContent = "A";
-    $("professorAvatar").textContent = "P";
-    return;
-  }
 
   $("tipoUsuario").value = saved.tipoUsuario || "aluno";
   $("nome").value = saved.nome || "";
@@ -2680,10 +2956,16 @@ function carregarFicha() {
   $("historicoTreino").value = saved.historicoTreino || "0";
   $("frequencia").value = saved.frequencia || "5";
   $("condicao").value = saved.condicao || "sem_restricao";
+  $("perfilAtencao").value = saved.perfilAtencao || "adulto";
+  $("dorAtual").value = saved.dorAtual || "0";
+  $("perdaForca").value = saved.perdaForca || "nenhuma";
+  $("dificuldadeFuncional").value = saved.dificuldadeFuncional || "nenhuma";
+  $("liberacaoProfissional").value = saved.liberacaoProfissional || "nao_informado";
   if (saved.fotoPerfil) updateFileLabel("fotoPerfilTexto", "Foto do aluno salva");
   if (saved.fotoProfessor) updateFileLabel("fotoProfessorTexto", "Foto do professor salva");
   treinosAtuais = ajustarTreinos(saved.objetivo, saved.nivel, saved.frequencia, saved.condicao);
   atualizarInterface(saved);
+  if (saved.demo && !hasFichaSalva()) toast("Modo demo ativo: protocolo completo carregado sem ficha salva.");
 }
 
 document.querySelectorAll("[data-section]").forEach((btn) => {
@@ -2707,6 +2989,12 @@ document.querySelectorAll("#filtrosTreino button").forEach((btn) => {
 });
 
 $("btnGerar").addEventListener("click", () => withButtonLoading($("btnGerar"), "Gerando ficha", gerarFicha));
+$("btnBackup")?.addEventListener("click", baixarBackupLocal);
+$("btnRestaurar")?.addEventListener("click", () => $("backupFile")?.click());
+$("backupFile")?.addEventListener("change", (event) => {
+  restaurarBackupLocal(event.target.files?.[0]);
+  event.target.value = "";
+});
 $("fotoPerfil").addEventListener("change", async (event) => {
   const file = event.target.files?.[0];
   if (!file) return;
